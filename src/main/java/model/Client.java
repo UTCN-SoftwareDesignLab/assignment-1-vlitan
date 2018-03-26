@@ -1,14 +1,14 @@
 package model;
 
 
-public class Client {
+public class Client
+    private int     id;
     private String  name;
     private String  identityCardNumber;
     private String  personalNumericalCode;
     private String  address;
 
-    public Client() {
-    }
+    public Client() { }
 
     public String getName() {
         return name;

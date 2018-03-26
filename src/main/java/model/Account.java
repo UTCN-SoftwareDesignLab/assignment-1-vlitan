@@ -9,8 +9,7 @@ public class Account {
     private int amount;
     private Date creationDate;
 
-    public Account() {
-    }
+    public Account() { }
 
     public int getId() {
         return id;
