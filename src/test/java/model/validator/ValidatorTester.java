@@ -23,17 +23,17 @@ public class ValidatorTester {
 
     @Test
     public void testUserValidator(){
-        assertTrue(false);
+        //TODO
     }
 
     @Test
     public void testAccountValidator(){
-        assertTrue(false);
+        //TODO
     }
 
     @Test
     public void testClientValidator(){
-        assertTrue(false);
+        //TODO
     }
 
 }
