@@ -9,16 +9,18 @@ public class Transfer {
     private Account sourceAccount;
     private Account destinationAccount;
     private Date date;
+    private int userId;
 
-    public Transfer(int amount, Account sourceAccount, Account destinationAccount, Date date) {
+    public Transfer(int amount, Account sourceAccount, Account destinationAccount, Date date, int userId) {
         this.amount = amount;
         this.sourceAccount = sourceAccount;
         this.destinationAccount = destinationAccount;
         this.date = date;
+        this.userId = userId;
     }
 
-    public Transfer(int id, int amount, Account sourceAccount, Account destinationAccount, Date date) {
-        this(amount, sourceAccount, destinationAccount, date);
+    public Transfer(int id, int amount, Account sourceAccount, Account destinationAccount, Date date, int userId) {
+        this(amount, sourceAccount, destinationAccount, date, userId);
         this.id = id;
     }
 

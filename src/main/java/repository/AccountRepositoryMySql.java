@@ -27,7 +27,7 @@ public class AccountRepositoryMySql implements AccountRepository{
 
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO account values (null, ?, ?, ?)");
-            statement.setString(1, "test");//TODO get string from AccountType enum
+            statement.setString(1, account.getType().toString());//TODO get string from AccountType enum
             statement.setInt(2, account.getAmount());
             statement.setDate(3, account.getCreationDate());
             statement.execute();
@@ -44,8 +44,8 @@ public class AccountRepositoryMySql implements AccountRepository{
         Connection connection = connectionWrapper.getConnection();
 
         try {
-            PreparedStatement statement = connection.prepareStatement("     \"UPDATE account SET values (?, ?, ?, ?) WHERE ID = ?\"");
-            statement.setString(1, "test");//TODO get string from AccountType enum
+            PreparedStatement statement = connection.prepareStatement("UPDATE account SET values (?, ?, ?, ?) WHERE ID = ?");
+            statement.setString(1, account.getType().toString());//TODO get string from AccountType enum
             //TODO
             return true;
         } catch (SQLException e) {
