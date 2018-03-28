@@ -34,45 +34,37 @@ public class Bootstrap {
     }
 
 
-    private static void bootstrapData(List<Schema> schemas) {
-        //Orderd is important. TODO find a way to improve this
-        bootstrapClientData(schemas);
-        bootstrapUserData(schemas);
-        bootstrapTransferData(schemas);
-        bootstrapAccountData(schemas);
-    }
-
-    private static void bootstrapAccountData(List<Schema> schemas) {
-
-    }
-
-    private static void bootstrapTransferData(List<Schema> schemas) {
-    }
-
-    private static void bootstrapUserData(List<Schema> schemas) {
-    }
-
-    private static void bootstrapClientData(List<Schema> schemas) {
-        
-    }
-
-    private static void bootstrapTables(List<Schema> schemas)  throws SQLException {
-        for (Schema schema : schemas) {
-            System.out.println("Dropping all tables in schema: " + schema);
+    private static void bootstrapData(List<Schema> schemas) throws SQLException{
+       for (Schema schema : schemas) {
+            System.out.println("[Bootstrap] Populating all tables in schema: " + schema);
             Connection connection = new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(schema)).getConnection();
             Statement statement = connection.createStatement();
 
             for (TableName tableName : ORDERED_TABLES){
-                String createTableSQL = SQLTableFactory.getCreateSQLForTable(tableName);
+                String createTableSQL = SqlQueryFactory.getInsertDataSQL(tableName);
                 statement.execute(createTableSQL);
             }
         }
-        System.out.println("Done creating tables");
+        System.out.println("[Bootstrap] Done creating tables");
+    }
+
+    private static void bootstrapTables(List<Schema> schemas)  throws SQLException {
+        for (Schema schema : schemas) {
+            System.out.println("[Bootstrap] Creating all tables in schema: " + schema);
+            Connection connection = new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(schema)).getConnection();
+            Statement statement = connection.createStatement();
+
+            for (TableName tableName : ORDERED_TABLES){
+                String createTableSQL = SqlQueryFactory.getCreateSQLForTable(tableName);
+                statement.execute(createTableSQL);
+            }
+        }
+        System.out.println("[Bootstrap] Done creating tables");
     }
 
     private static void dropAll(List<Schema> schemas) throws SQLException {
         for (Schema schema : schemas) {
-            System.out.println("Dropping all tables in schema: " + schema);
+            System.out.println("[Bootstrap] Dropping all tables in schema: " + schema);
 
             Connection connection = new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(schema)).getConnection();
             Statement statement = connection.createStatement();
@@ -89,6 +81,6 @@ public class Bootstrap {
             statement.execute(dropSQL);
         }
 
-        System.out.println("Done dropping tables");
+        System.out.println("[Bootstrap] Done dropping tables");
     }
 }

@@ -1,17 +1,17 @@
 package database;
 
-public class SQLTableFactory {
+public class SqlQueryFactory {
     public static String getCreateSQLForTable(TableName table) {
         switch (table) {
             case CLIENT: return
                     "CREATE TABLE IF NOT EXISTS `Client` (\n" +
-                    "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
-                    "  `name` VARCHAR(45) NOT NULL,\n" +
-                    "  `identity_card_number` VARCHAR(45) NOT NULL,\n" +
-                    "  `personal_numerical_code` VARCHAR(45) NOT NULL,\n" +
-                    "  `address` VARCHAR(45) NOT NULL,\n" +
-                    "  PRIMARY KEY (`id`))\n" +
-                    "ENGINE = InnoDB;";
+                            "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                            "  `name` VARCHAR(45) NOT NULL,\n" +
+                            "  `identity_card_number` VARCHAR(45) NOT NULL,\n" +
+                            "  `personal_numerical_code` VARCHAR(45) NOT NULL,\n" +
+                            "  `address` VARCHAR(45) NOT NULL,\n" +
+                            "  PRIMARY KEY (`id`))\n" +
+                            "ENGINE = InnoDB;";
             case USER: return "CREATE TABLE IF NOT EXISTS `User` (\n" +
                     "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                     "  `username` VARCHAR(45) NOT NULL,\n" +
@@ -58,9 +58,26 @@ public class SQLTableFactory {
                             "    ON UPDATE NO ACTION)\n" +
                             "ENGINE = InnoDB;\n" +
                             "\n" +
-                            "CREATE INDEX `fk_Transfer_User1_idx` ON `Transfer` (`User_id` ASC);";
+                            "CREATE INDEX `fk_Transfer_User1_idx` ON `Transfer` (`User_id` ASC);\n";
             default:
-                return "";
+                return  "SELECT 1;";
+
+        }
+    }
+
+
+    public static String getInsertDataSQL(TableName table) {
+        switch (table) {
+            case CLIENT: return "SELECT 1;";
+            case USER: return
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-andrei', 'pass1');\n" +
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-mihai', 'pass2');\n" +
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-pavel', 'pass3');\n" +
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-chinezu', 'pass4');";
+            case ACCOUNT: return "SELECT 1;";
+            case TRANSFER: return "SELECT 1;";
+            default:
+                return  "SELECT 1;";
 
         }
     }

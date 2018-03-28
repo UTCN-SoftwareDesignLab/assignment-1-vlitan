@@ -7,8 +7,7 @@ import java.util.List;
 public interface UserRepository {
     boolean addUser(User user);
     boolean updateUser(User user);
-    boolean deleteUser(User user);
-    boolean dropAllUsers();
+    boolean deleteUserById(User user);
     List<User> findAllUsers();
     User findUserById(int id);
 }

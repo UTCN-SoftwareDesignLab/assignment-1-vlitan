@@ -26,10 +26,17 @@ public class AccountRepositoryMySql implements AccountRepository{
         Connection connection = connectionWrapper.getConnection();
 
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO account values (null, ?, ?, ?)");
-            statement.setString(1, account.getType().toString());//TODO get string from AccountType enum
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO Account (`id`,\n" +
+                            "`account_type`,\n" +
+                            "`amount`,\n" +
+                            "`creation_date`,\n" +
+                            "`Client_id`,\n" +
+                            "`Transfer_id`) (null, ?, ?, ?, ?, null)");
+            statement.setString(1, account.getType().toString());
             statement.setInt(2, account.getAmount());
             statement.setDate(3, account.getCreationDate());
+        //    statement.setInt(4, account.ge);
             statement.execute();
             return true;
         } catch (SQLException e) {
@@ -44,8 +51,9 @@ public class AccountRepositoryMySql implements AccountRepository{
         Connection connection = connectionWrapper.getConnection();
 
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE account SET values (?, ?, ?, ?) WHERE ID = ?");
-            statement.setString(1, account.getType().toString());//TODO get string from AccountType enum
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE account SET values (?, ?, ?, ?) WHERE ID = ?");
+            statement.setString(1, account.getType().toString());
             //TODO
             return true;
         } catch (SQLException e) {
@@ -59,10 +67,6 @@ public class AccountRepositoryMySql implements AccountRepository{
         return false;
     }
 
-    @Override
-    public boolean dropAllAccounts() {
-        return false;
-    }
 
     @Override
     public List<Account> findAllAccounts() {
