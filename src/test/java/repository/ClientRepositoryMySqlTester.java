@@ -55,12 +55,12 @@ public class ClientRepositoryMySqlTester {
         client = repository.findClientById(2);
         assertEquals(client.getAddress(), newAddress);
     }
-//TODO
-//    @Test
-//    public void testDeleteClient(){
-//        repository.deleteClientById(repository.findClientById(2));
-//        assertEquals(repository.findClientById(2).getId(), 0);
-//    }
+
+    @Test
+    public void testDeleteClient(){
+        repository.deleteClientById(repository.findClientById(2));
+        assertEquals(repository.findClientById(2).getId(), 0);
+    }
 
     @Test
     public void testInsertClient(){
@@ -73,5 +73,6 @@ public class ClientRepositoryMySqlTester {
                 .build());
         Client user = repository.findClientById(clients.size() + 1);
         assertNotNull(user);
+        assertEquals(user.getAddress(), "america");
     }
 }

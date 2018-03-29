@@ -95,6 +95,24 @@ public class ClientRepositoryMySql implements ClientRepository {
     }
 
     @Override
+    public boolean deleteClientById(Client client) {
+        Connection connection = connectionWrapper.getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM `Client`\n" +
+                            "WHERE `id` = ?;");
+            statement.setInt(1, client.getId());
+            statement.execute();
+            statement.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public Client findClientById(int id) {
 
         Connection connection = connectionWrapper.getConnection();
