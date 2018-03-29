@@ -20,6 +20,9 @@ public class Transfer {
 
     private int userId;
 
+    public Transfer(){
+    }
+
     public Transfer(int amount, Account sourceAccount, Account destinationAccount, Date date, int userId) {
         this.amount = amount;
         this.sourceAccount = sourceAccount;
