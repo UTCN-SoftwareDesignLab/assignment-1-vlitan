@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Transfer {
 
@@ -9,15 +9,6 @@ public class Transfer {
     private Account sourceAccount;
     private Account destinationAccount;
     private Date date;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     private int userId;
 
     public Transfer(){
@@ -36,6 +27,13 @@ public class Transfer {
         this.id = id;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     public int getId() {
         return id;
     }
