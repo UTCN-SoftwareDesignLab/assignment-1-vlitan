@@ -1,12 +1,12 @@
 package database;
 
+import com.sun.org.apache.bcel.internal.generic.TargetLostException;
+
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static database.Schema.TEST;
 import static database.TableName.*;
@@ -22,7 +22,7 @@ public class Bootstrap {
     ROLE_RIGHT,
     USER_ROLE
 * */
-    private static final TableName[] ORDERED_TABLES = new TableName[]{CLIENT, USER, TRANSFER, ACCOUNT};//ordered tables for creation
+    private static final TableName[] ORDERED_TABLES = new TableName[]{CLIENT, USER, TRANSFER, ACCOUNT, ACCOUNT_HAS_TRANSFER};//ordered tables for creation
     private static final List<Schema> schemasToBootstrap = new ArrayList<Schema>(Arrays.asList(TEST));
     public static void main(String[] args) throws SQLException {
 
@@ -69,7 +69,9 @@ public class Bootstrap {
             Connection connection = new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(schema)).getConnection();
             Statement statement = connection.createStatement();
 
-            String dropSQL = "TRUNCATE `Account`; \n" +
+            String dropSQL ="TRUNCATE `Account_has_Transfer`; \n" +
+                            "DROP TABLE `Account_has_Transfer`; \n" +
+                            "TRUNCATE `Account`; \n" +
                             "DROP TABLE `Account`; \n" +
                             "TRUNCATE `Transfer`; \n" +
                             "DROP TABLE `Transfer`; \n" +

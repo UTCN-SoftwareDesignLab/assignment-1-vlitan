@@ -8,30 +8,31 @@ import model.Account;
 import model.Client;
 import model.User;
 import model.builder.UserBuilder;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import static database.Schema.TEST;
+import static org.junit.Assert.*;
 
 public class UserRepositoryMySqlTester {
     private static UserRepositoryMySql repository;
     private static final int INITIAL_COUNT = 4;
+
      @BeforeClass
-    public static void setupClass() throws Exception {
-         Bootstrap.main(null); // TODO add parameters to this
+    public static void setupClass()  {
          repository = new UserRepositoryMySql(new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(TEST)));
     }
 
+    @Before
+    public void bootstrap()throws Exception{
+        Bootstrap.main(null) ; // TODO add parameters to this
+    }
     //TODO make this check against constants and insert also those constants in bootstrap
     @Test
     public void testSelect()throws Exception{
-        Bootstrap.main(null); // TODO add parameters to this
         List<User> users = repository.findAllUsers();
         assertTrue(users.size() == INITIAL_COUNT);
     }
@@ -45,8 +46,29 @@ public class UserRepositoryMySqlTester {
     }
 
     @Test
-    public void testInsert(){
-        repository.addUser((new UserBuilder()).setUsername("logofat").setPassword("auri").build());
-
+    public void testUpdateUser(){
+        User user = repository.findUserById(2);
+        user.setUsername("newname");
+        user.setPassword("newpass");
+        repository.updateUser(user);
+        assertEquals(user.getUsername(), "newname");
+        assertEquals(user.getPassword(),"newpass");
+        assertEquals(user.getId(), 2);
     }
+
+    @Test
+    public void testDeleteUser(){
+        repository.deleteUserById(repository.findUserById(2));
+        assertEquals(repository.findUserById(2).getId(), 0);
+    }
+
+    @Test
+    public void testInsert(){
+        List<User> users = repository.findAllUsers();
+        repository.addUser((new UserBuilder()).setUsername("logofat").setPassword("auri").build());
+        User user = repository.findUserById(users.size() + 1);
+        assertNotNull(user);
+    }
+
+
 }

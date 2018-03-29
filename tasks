@@ -1,11 +1,10 @@
 x   modify bootstrap in order to give as argument a list of schemas
 0   write then test repository for
-0        CLIENT,
+X        CLIENT,
 0        USER,
 0        TRANSFER,
 0        ACCOUNT
 0    gather all constants in a file / package
-0    hardcode bootstrap data in constants file
 0        CLIENT
 0        USER
 0        TRANSFER

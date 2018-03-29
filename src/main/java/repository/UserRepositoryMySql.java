@@ -95,14 +95,7 @@ public class UserRepositoryMySql implements UserRepository {
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                int id = rs.getInt("id");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                users.add((new UserBuilder())
-                        .setId(id)
-                        .setPassword(password)
-                        .setUsername(username)
-                        .build());
+                users.add(getUserFromResultSet(rs));
             }
             statement.close();
         } catch (SQLException e) {
@@ -117,7 +110,6 @@ public class UserRepositoryMySql implements UserRepository {
 
         User user = new User();
         try {
-
             PreparedStatement statement = connection.prepareStatement(
                     "SELECT `User`.`id`,\n" +
                             "   `User`.`username`,\n" +
@@ -128,18 +120,23 @@ public class UserRepositoryMySql implements UserRepository {
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                user =  (new UserBuilder())
-                        .setId(id)
-                        .setPassword(password)
-                        .setUsername(username)
-                        .build();
+                user =  getUserFromResultSet(rs);
             }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    private User getUserFromResultSet(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        String username = rs.getString("username");
+        String password = rs.getString("password");
+        return (new UserBuilder())
+                .setId(id)
+                .setPassword(password)
+                .setUsername(username)
+                .build();
     }
 }

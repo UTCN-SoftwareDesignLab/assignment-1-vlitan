@@ -8,5 +8,6 @@ public enum TableName {
     ACCOUNT,
     RIGHT,
     ROLE_RIGHT,
-    USER_ROLE
+    USER_ROLE,
+    ACCOUNT_HAS_TRANSFER
 }
