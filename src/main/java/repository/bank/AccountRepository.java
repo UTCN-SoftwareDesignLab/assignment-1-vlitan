@@ -1,4 +1,4 @@
-package repository;
+package repository.bank;
 
 import model.Account;
 import model.Client;

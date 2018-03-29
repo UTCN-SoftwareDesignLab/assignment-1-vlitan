@@ -1,4 +1,4 @@
-package repository;
+package repository.bank;
 
 import database.JDBConnectionWrapper;
 import model.Client;

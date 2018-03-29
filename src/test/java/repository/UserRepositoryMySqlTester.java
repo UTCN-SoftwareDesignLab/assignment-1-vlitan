@@ -3,14 +3,12 @@ package repository;
 import database.Bootstrap;
 import database.JDBConnectionWrapper;
 import database.JDBSchemaStringFactory;
-import database.Schema;
-import model.Account;
-import model.Client;
 import model.User;
 import model.builder.UserBuilder;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import repository.bank.UserRepositoryMySql;
 
 import java.util.List;
 

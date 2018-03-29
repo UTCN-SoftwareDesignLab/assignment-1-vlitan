@@ -5,10 +5,10 @@ import database.JDBConnectionWrapper;
 import database.JDBSchemaStringFactory;
 import model.Client;
 import model.builder.ClientBuilder;
-import model.builder.UserBuilder;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import repository.bank.ClientRepositoryMySql;
 
 import java.util.List;
 

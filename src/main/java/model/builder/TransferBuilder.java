@@ -20,7 +20,7 @@ public class TransferBuilder {
         transfer.setAmount(amount);
         return this;
     }
-    public TransferBuilder setSourceAccount(Account account{
+    public TransferBuilder setSourceAccount(Account account){
         transfer.setSourceAccount(account);
         return this;
     }
