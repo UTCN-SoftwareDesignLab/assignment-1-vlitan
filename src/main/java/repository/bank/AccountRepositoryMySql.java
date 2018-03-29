@@ -24,7 +24,7 @@ public class AccountRepositoryMySql implements AccountRepository{
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Account (`id`,\n" +
+                    "INSERT INTO Account\n" +
                             "(`id`,\n" +
                             "`account_type`,\n" +
                             "`amount`,\n" +
@@ -35,7 +35,7 @@ public class AccountRepositoryMySql implements AccountRepository{
             statement.setString(1, account.getType().toString());
             statement.setInt(2, account.getAmount());
             statement.setDate(3, account.getCreationDate());
-            statement.setInt(3, account.getOwnerId());
+            statement.setInt(4, account.getOwnerId());
             statement.execute();
             return true;
         } catch (SQLException e) {
@@ -51,9 +51,18 @@ public class AccountRepositoryMySql implements AccountRepository{
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE account SET values (?, ?, ?, ?) WHERE ID = ?");
+                    "UPDATE Account SET \n" +
+                            "`account_type` = ?,\n" +
+                            "`amount` = ?,\n" +
+                            "`creation_date` = ?,\n" +
+                            "`Client_id` = ? WHERE `id` = ?");
             statement.setString(1, account.getType().toString());
-            //TODO
+            statement.setInt(2, account.getAmount());
+            statement.setDate(3, account.getCreationDate());
+            statement.setInt(4, account.getOwnerId());
+            statement.setInt(5, account.getId());
+            statement.execute();
+            statement.close();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +72,20 @@ public class AccountRepositoryMySql implements AccountRepository{
 
     @Override
     public boolean deleteAccount(Account account) {
-        return false;
+
+        Connection connection = connectionWrapper.getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM Account  WHERE `id` = ?");
+            statement.setInt(1, account.getId());
+            statement.execute();
+            statement.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
@@ -116,7 +138,9 @@ public class AccountRepositoryMySql implements AccountRepository{
                     "SELECT * FROM Account WHERE `id` = ?");
             statement.setInt(1,id);
             ResultSet rs = statement.executeQuery();
-            account = getAccountFromResultSet(rs);
+            if (rs.next()) {
+                account = getAccountFromResultSet(rs);
+            }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -126,7 +150,7 @@ public class AccountRepositoryMySql implements AccountRepository{
 
     private Account getAccountFromResultSet(ResultSet rs) throws SQLException{
         int id = rs.getInt("id");
-        AccountType type = AccountType.valueOf(rs.getString("type").toUpperCase());
+        AccountType type = AccountType.valueOf(rs.getString("account_type").toUpperCase());
         int amount = rs.getInt("amount");
         Date creationDate = rs.getDate("creation_date");
         int ownerId = rs.getInt("Client_id");

@@ -1,7 +1,7 @@
 x   modify bootstrap in order to give as argument a list of schemas
 0   write then test repository for
 X        CLIENT,
-0        USER,
+X        USER,
 0        TRANSFER,
 0        ACCOUNT
 0    gather all constants in a file / package
@@ -9,11 +9,11 @@ X        CLIENT,
 0        USER
 0        TRANSFER
 0        ACCOUNT
-0    write bootstrap data using repository
+0    refactor tests maybe
 0
-0    write bootstrap drop and create for Role right stuff
-0    write then test repository for Role
-0    gather hardcoded data
-0    bootstrap data using repository
+0    copy paste Righ-Role stuff
+0    test ^^^^^^
 
 +++++++++++++ DAO DONE +++++++++++++++++
+0   write validator tests
+

@@ -102,7 +102,11 @@ public class SqlQueryFactory {
                     "INSERT INTO `User` (`username`, `password`) VALUES ('user-mihai', 'pass2');\n" +
                     "INSERT INTO `User` (`username`, `password`) VALUES ('user-pavel', 'pass3');\n" +
                     "INSERT INTO `User` (`username`, `password`) VALUES ('user-chinezu', 'pass4');";
-            case ACCOUNT: return "SELECT 1;";
+
+            case ACCOUNT: return
+                    "INSERT INTO `Account` (`account_type`,`amount`,`creation_date`,`Client_id`)VALUES('CREDIT',2,'1901-03-02',1);\n" +
+                    "INSERT INTO `Account` (`account_type`,`amount`,`creation_date`,`Client_id`)VALUES('DEBIT',43,'1944-03-02',1);\n" +
+                    "INSERT INTO `Account` (`account_type`,`amount`,`creation_date`,`Client_id`)VALUES('CREDIT',5,'1905-03-02',2);";
             case TRANSFER: return "SELECT 1;";
             default:
                 return  "SELECT 1;";
