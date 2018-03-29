@@ -9,6 +9,15 @@ public class Transfer {
     private Account sourceAccount;
     private Account destinationAccount;
     private Date date;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     private int userId;
 
     public Transfer(int amount, Account sourceAccount, Account destinationAccount, Date date, int userId) {

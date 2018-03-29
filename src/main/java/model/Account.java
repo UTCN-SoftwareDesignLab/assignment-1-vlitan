@@ -8,6 +8,17 @@ public class Account {
     private AccountType type;
     private int amount;
     private Date creationDate;
+    private int ownerId;
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+
 
     public Account() { }
 

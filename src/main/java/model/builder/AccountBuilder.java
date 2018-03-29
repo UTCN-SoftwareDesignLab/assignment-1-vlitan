@@ -32,6 +32,11 @@ public class AccountBuilder {
         return this;
     }
 
+    public AccountBuilder setOwnerId(int id){
+        account.setOwnerId(id);
+        return this;
+    }
+
     public Account build(){
         return account;
     }
