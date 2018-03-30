@@ -27,12 +27,12 @@ public class ClientRepositoryMySqlTester {
     }
 
     @Before
-    public void bootstrap()throws Exception{
+    public void bootstrap() throws Exception{
         Bootstrap.main(null) ; // TODO add parameters to this
     }
     //TODO make this check against constants and insert also those constants in bootstrap
     @Test
-    public void testSelect()throws Exception{
+    public void testSelect() throws Exception{
         List<Client> clients = repository.findAll();
         assertTrue(clients.size() == INITIAL_COUNT);
     }
