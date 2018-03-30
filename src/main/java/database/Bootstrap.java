@@ -22,7 +22,7 @@ public class Bootstrap {
     ROLE_RIGHT,
     USER_ROLE
 * */
-    private static final TableName[] ORDERED_TABLES = new TableName[]{CLIENT, USER, ACTION, ACCOUNT, ACCOUNT_HAS_TRANSFER};//ordered tables for creation
+    private static final TableName[] ORDERED_TABLES = new TableName[]{CLIENT, USER, ACTION, ACCOUNT,  ROLE, RIGHT, ROLE_RIGHT, USER_ROLE};//ordered tables for creation
     private static final List<Schema> schemasToBootstrap = new ArrayList<Schema>(Arrays.asList(TEST));
     public static void main(String[] args) throws SQLException {
         for (Schema schema : schemasToBootstrap) {
@@ -61,14 +61,22 @@ public class Bootstrap {
         Connection connection = new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(schema)).getConnection();
         Statement statement = connection.createStatement();
 
-        String dropSQL ="TRUNCATE `Account`; \n" +
+        String dropSQL =
+                        "TRUNCATE `role_right`; \n" +
+                        "DROP TABLE `role_right`; \n" +
+                        "TRUNCATE `right`; \n" +
+                        "DROP TABLE `right`; \n" +
+                        "TRUNCATE `user_role`; \n" +
+                        "DROP TABLE `user_role`; \n" +
+                        "TRUNCATE `Account`; \n" +
                         "DROP TABLE `Account`; \n" +
                         "TRUNCATE `Action`; \n" +
                         "DROP TABLE `Action`; \n" +
                         "TRUNCATE `User`; \n" +
                         "DROP TABLE `User`; \n" +
                         "TRUNCATE `Client`; \n" +
-                        "DROP TABLE  `Client`;";
+                        "DROP TABLE  `Client`;\n"+
+                        "TRUNCATE `role`; \n";
 
         statement.execute(dropSQL);
     }
