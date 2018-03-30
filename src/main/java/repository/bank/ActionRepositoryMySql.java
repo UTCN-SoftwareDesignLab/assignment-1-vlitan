@@ -20,7 +20,7 @@ public class ActionRepositoryMySql implements ActionRepository {
     }
 
     @Override
-    public boolean addAction(Action action) {
+    public boolean add(Action action) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -46,7 +46,7 @@ public class ActionRepositoryMySql implements ActionRepository {
 
 
     @Override
-    public boolean updateAction(Action action) {
+    public boolean update(Action action) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -71,7 +71,7 @@ public class ActionRepositoryMySql implements ActionRepository {
     }
 
     @Override
-    public List<Action> findAllActions() {
+    public List<Action> findAll() {
         Connection connection = connectionWrapper.getConnection();
         List<Action> actions = new ArrayList<>();
 
@@ -90,7 +90,7 @@ public class ActionRepositoryMySql implements ActionRepository {
     }
 
     @Override
-    public Action findActionById(int id) {
+    public Action findById(int id) {
         Connection connection = connectionWrapper.getConnection();
         Action action = new Action();
 

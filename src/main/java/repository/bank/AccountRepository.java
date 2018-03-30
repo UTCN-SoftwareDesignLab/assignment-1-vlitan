@@ -6,10 +6,10 @@ import model.Client;
 import java.util.List;
 
 public interface AccountRepository {
-    boolean addAccount(Account account);
-    boolean updateAccount(Account account);
-    boolean deleteAccount(Account account);
-    List<Account> findAllAccounts();
+    boolean add(Account account);
+    boolean update(Account account);
+    boolean delete(Account account);
+    List<Account> findAll();
     List<Account> findByClient(Client client);
-    Account findAccountById(int id);
+    Account findById(int id);
 }

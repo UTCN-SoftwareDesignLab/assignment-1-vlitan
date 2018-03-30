@@ -5,9 +5,9 @@ import model.Client;
 import java.util.List;
 
 public interface ClientRepository {
-    boolean addClient(Client client);
-    boolean updateClient(Client client);
-    List<Client> findAllClients();
-    boolean deleteClientById(Client client);
-    Client findClientById(int id);
+    boolean add(Client client);
+    boolean update(Client client);
+    List<Client> findAll();
+    boolean deleteById(Client client);
+    Client findById(int id);
 }

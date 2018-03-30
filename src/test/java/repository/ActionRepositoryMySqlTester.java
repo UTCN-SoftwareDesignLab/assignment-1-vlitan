@@ -46,8 +46,8 @@ public class ActionRepositoryMySqlTester {
                 .setDate(date)
                 .setUserId(userId)
                 .build();
-        repository.addAction(mockAction);
-        Action retrievedAction = repository.findActionById(INIT_COUNT + 1);
+        repository.add(mockAction);
+        Action retrievedAction = repository.findById(INIT_COUNT + 1);
         assertNotNull(retrievedAction);
         assertTrue(retrievedAction.getId() > 0);
     }
@@ -55,23 +55,23 @@ public class ActionRepositoryMySqlTester {
     @Test
     public void updateAndFindAction(){
         String description = "testDescription";
-        Action retrievedAction = repository.findActionById(2);
+        Action retrievedAction = repository.findById(2);
         retrievedAction.setDescription(description);
-        repository.updateAction(retrievedAction);
-        retrievedAction = repository.findActionById(2);
+        repository.update(retrievedAction);
+        retrievedAction = repository.findById(2);
         assertEquals(retrievedAction.getDescription(), description);
     }
 
     @Test
     public void findAllActionsTest(){
-        List<Action> actions = repository.findAllActions();
+        List<Action> actions = repository.findAll();
         assertEquals(actions.size(), INIT_COUNT);
     }
 
 
     @Test
     public void findByUserTest(){
-        Action retrievedAction = repository.findActionById(1);
+        Action retrievedAction = repository.findById(1);
         assertNotNull(retrievedAction);
         assertEquals(retrievedAction.getId(), 1);
     }

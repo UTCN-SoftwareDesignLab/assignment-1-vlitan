@@ -31,13 +31,13 @@ public class UserRepositoryMySqlTester {
     //TODO make this check against constants and insert also those constants in bootstrap
     @Test
     public void testSelect()throws Exception{
-        List<User> users = repository.findAllUsers();
+        List<User> users = repository.findAll();
         assertTrue(users.size() == INITIAL_COUNT);
     }
 
     @Test
     public void testFindUserById(){
-        User user = repository.findUserById(2);
+        User user = repository.findById(2);
         assertEquals(user.getUsername(), "user-mihai");
         assertEquals(user.getPassword(),"pass2");
         assertEquals(user.getId(), 2);
@@ -45,10 +45,10 @@ public class UserRepositoryMySqlTester {
 
     @Test
     public void testUpdateUser(){
-        User user = repository.findUserById(2);
+        User user = repository.findById(2);
         user.setUsername("newname");
         user.setPassword("newpass");
-        repository.updateUser(user);
+        repository.update(user);
         assertEquals(user.getUsername(), "newname");
         assertEquals(user.getPassword(),"newpass");
         assertEquals(user.getId(), 2);
@@ -56,15 +56,15 @@ public class UserRepositoryMySqlTester {
 
     @Test
     public void testDeleteUser(){
-        repository.deleteUserById(repository.findUserById(2));
-        assertEquals(repository.findUserById(2).getId(), 0);
+        repository.deleteById(repository.findById(2));
+        assertEquals(repository.findById(2).getId(), 0);
     }
 
     @Test
     public void testInsert(){
-        List<User> users = repository.findAllUsers();
-        repository.addUser((new UserBuilder()).setUsername("logofat").setPassword("auri").build());
-        User user = repository.findUserById(users.size() + 1);
+        List<User> users = repository.findAll();
+        repository.add((new UserBuilder()).setUsername("logofat").setPassword("auri").build());
+        User user = repository.findById(users.size() + 1);
         assertNotNull(user);
     }
 

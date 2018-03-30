@@ -20,7 +20,7 @@ public class ClientRepositoryMySql implements ClientRepository {
     }
 
     @Override
-    public boolean addClient(Client client) {
+    public boolean add(Client client) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -48,7 +48,7 @@ public class ClientRepositoryMySql implements ClientRepository {
 
 
     @Override
-    public boolean updateClient(Client client) {
+    public boolean update(Client client) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -75,7 +75,7 @@ public class ClientRepositoryMySql implements ClientRepository {
     }
 
     @Override
-    public List<Client> findAllClients() {
+    public List<Client> findAll() {
         Connection connection = connectionWrapper.getConnection();
 
         List<Client> clients = new ArrayList<Client>();
@@ -95,7 +95,7 @@ public class ClientRepositoryMySql implements ClientRepository {
     }
 
     @Override
-    public boolean deleteClientById(Client client) {
+    public boolean deleteById(Client client) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -113,7 +113,7 @@ public class ClientRepositoryMySql implements ClientRepository {
     }
 
     @Override
-    public Client findClientById(int id) {
+    public Client findById(int id) {
 
         Connection connection = connectionWrapper.getConnection();
 

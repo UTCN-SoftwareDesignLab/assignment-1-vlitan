@@ -18,7 +18,7 @@ public class UserRepositoryMySql implements UserRepository {
 
 
     @Override
-    public boolean addUser(User user) {
+    public boolean add(User user) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -39,7 +39,7 @@ public class UserRepositoryMySql implements UserRepository {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public boolean update(User user) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -63,7 +63,7 @@ public class UserRepositoryMySql implements UserRepository {
     }
 
     @Override
-    public boolean deleteUserById(User user) {
+    public boolean deleteById(User user) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -81,7 +81,7 @@ public class UserRepositoryMySql implements UserRepository {
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAll() {
         Connection connection = connectionWrapper.getConnection();
 
         List<User> users = new ArrayList<User>();
@@ -105,7 +105,7 @@ public class UserRepositoryMySql implements UserRepository {
     }
 
     @Override
-    public User findUserById(int id) {
+    public User findById(int id) {
         Connection connection = connectionWrapper.getConnection();
 
         User user = new User();

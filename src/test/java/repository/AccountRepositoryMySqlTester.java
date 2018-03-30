@@ -46,9 +46,9 @@ public class AccountRepositoryMySqlTester {
                                 .setOwnerId(ownerId)
                                 .setType(type)
                                 .build();
-        repository.addAccount(mockAccount);
-        List<Account> accounts = repository.findAllAccounts();
-        Account retrievedAccount = repository.findAccountById(INIT_COUNT + 1);
+        repository.add(mockAccount);
+        List<Account> accounts = repository.findAll();
+        Account retrievedAccount = repository.findById(INIT_COUNT + 1);
         assertEquals(accounts.size(), INIT_COUNT + 1);
         assertEquals(retrievedAccount.getAmount(), mockAccount.getAmount());
     }
@@ -56,22 +56,22 @@ public class AccountRepositoryMySqlTester {
     @Test
     public void updateAndFindTest(){
         int amount = 2;
-        Account retrievedAccount = repository.findAccountById(2);
+        Account retrievedAccount = repository.findById(2);
         retrievedAccount.setAmount(amount);
-        repository.updateAccount(retrievedAccount);
-        assertEquals(retrievedAccount.getAmount(), repository.findAccountById(2).getAmount());
+        repository.update(retrievedAccount);
+        assertEquals(retrievedAccount.getAmount(), repository.findById(2).getAmount());
     }
 
     @Test
     public void deleteAndFindTest(){
-        Account retrievedAccount = repository.findAccountById(2);
-        repository.deleteAccount(retrievedAccount);
-        assertEquals(repository.findAccountById(2).getId(), 0);
+        Account retrievedAccount = repository.findById(2);
+        repository.delete(retrievedAccount);
+        assertEquals(repository.findById(2).getId(), 0);
     }
 
     @Test
     public void findAllAccountsTest(){
-        List<Account> accounts = repository.findAllAccounts();
+        List<Account> accounts = repository.findAll();
         assertEquals(accounts.size(), INIT_COUNT);
     }
 

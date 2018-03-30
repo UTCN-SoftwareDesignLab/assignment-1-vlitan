@@ -19,7 +19,7 @@ public class AccountRepositoryMySql implements AccountRepository{
     }
 
     @Override
-    public boolean addAccount(Account account) {
+    public boolean add(Account account) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
@@ -45,7 +45,7 @@ public class AccountRepositoryMySql implements AccountRepository{
     }
 
     @Override
-    public boolean updateAccount(Account account) {
+    public boolean update(Account account) {
 
         Connection connection = connectionWrapper.getConnection();
 
@@ -71,7 +71,7 @@ public class AccountRepositoryMySql implements AccountRepository{
     }
 
     @Override
-    public boolean deleteAccount(Account account) {
+    public boolean delete(Account account) {
 
         Connection connection = connectionWrapper.getConnection();
 
@@ -90,7 +90,7 @@ public class AccountRepositoryMySql implements AccountRepository{
 
 
     @Override
-    public List<Account> findAllAccounts() {
+    public List<Account> findAll() {
         Connection connection = connectionWrapper.getConnection();
         List<Account> accounts = new ArrayList<Account>();
 
@@ -129,7 +129,7 @@ public class AccountRepositoryMySql implements AccountRepository{
     }
 
     @Override
-    public Account findAccountById(int id) {
+    public Account findById(int id) {
         Connection connection = connectionWrapper.getConnection();
         Account account = new Account();
 

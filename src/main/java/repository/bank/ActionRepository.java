@@ -7,9 +7,9 @@ import model.User;
 import java.util.List;
 
 public interface ActionRepository {
-    boolean addAction(Action action);
-    boolean updateAction(Action action);
-    List<Action> findAllActions();
-    Action findActionById(int id);
+    boolean add(Action action);
+    boolean update(Action action);
+    List<Action> findAll();
+    Action findById(int id);
     List<Action> findByUser(User user);
 }
