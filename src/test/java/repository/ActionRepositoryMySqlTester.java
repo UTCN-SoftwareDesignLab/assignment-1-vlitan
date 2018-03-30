@@ -6,8 +6,10 @@ import database.JDBSchemaStringFactory;
 import model.Account;
 import model.Action;
 import model.Transfer;
+import model.User;
 import model.builder.AccountBuilder;
 import model.builder.ActionBuilder;
+import model.builder.UserBuilder;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,7 +26,7 @@ import static database.Schema.TEST;
 import static org.junit.Assert.assertNotNull;
 
 public class ActionRepositoryMySqlTester {
-    private static final int INIT_COUNT = 3;
+    private static final int INIT_COUNT = 4;
     private static ActionRepository repository;
 
     @BeforeClass
@@ -68,6 +70,15 @@ public class ActionRepositoryMySqlTester {
         assertEquals(actions.size(), INIT_COUNT);
     }
 
+    @Test
+    public void findByUserInIntervalTest(){
+        Date start = new Date(15, 1, 1);
+        Date end = new Date(45, 1, 2);
+        User user = (new UserBuilder()).setId(2).build();
+        List<Action> actions = repository.findByUserInInterval(user, start, end);
+        assertEquals(1, actions.size());
+        assertEquals(actions.get(0).getDescription(), "mock description2");
+    }
 
     @Test
     public void findByUserTest(){

@@ -129,6 +129,31 @@ public class ActionRepositoryMySql implements ActionRepository {
         return actions;
     }
 
+    @Override
+    public List<Action> findByUserInInterval(User user, Date start, Date end) {
+        Connection connection = connectionWrapper.getConnection();
+        List<Action> actions = new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM Action WHERE \n" +
+                            "`User_id` = ? AND \n" +
+                            "(DATEDIFF(?, `date`) <= 0) AND \n" +
+                            "(DATEDIFF(`date`, ?) <= 0);");
+            statement.setInt(1, user.getId());
+            statement.setDate(2, start);
+            statement.setDate(3, end);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                actions.add(getActionFromResultSet(rs));
+            }
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return actions;
+    }
+
     private Action getActionFromResultSet(ResultSet rs) throws SQLException{
         int id = rs.getInt("id");
         String description = rs.getString("description");

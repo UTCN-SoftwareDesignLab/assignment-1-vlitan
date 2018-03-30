@@ -4,6 +4,7 @@ import model.Action;
 import model.Transfer;
 import model.User;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ActionRepository {
@@ -12,4 +13,5 @@ public interface ActionRepository {
     List<Action> findAll();
     Action findById(int id);
     List<Action> findByUser(User user);
+    List<Action> findByUserInInterval(User user, Date start, Date end);
 }

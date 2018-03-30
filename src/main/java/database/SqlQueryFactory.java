@@ -140,6 +140,7 @@ public class SqlQueryFactory {
             case ACTION: return
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description1','1901-03-02',2);\n" +
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description2','1931-03-02',2);\n" +
+                    "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description2','1999-03-02',2);\n" +
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description3','1981-03-02',1);\n";
             default:
                 return  "SELECT 1;";
