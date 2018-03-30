@@ -1,6 +1,9 @@
 package model.builder;
 
+import model.Role;
 import model.User;
+
+import java.util.List;
 
 public class UserBuilder {
     private User user;
@@ -11,6 +14,11 @@ public class UserBuilder {
 
     public UserBuilder setId(int id) {
         user.setId(id);
+        return this;
+    }
+
+    public UserBuilder setRoles(List<Role> roles){
+        user.setRoles(roles);
         return this;
     }
 

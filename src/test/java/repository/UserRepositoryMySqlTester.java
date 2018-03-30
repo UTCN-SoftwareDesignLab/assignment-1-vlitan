@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import repository.bank.UserRepositoryMySql;
+import repository.security.RightsRolesRepository;
+import repository.security.RightsRolesRepositoryMySQL;
 
 import java.util.List;
 
@@ -21,7 +23,8 @@ public class UserRepositoryMySqlTester {
 
      @BeforeClass
     public static void setupClass()  {
-         repository = new UserRepositoryMySql(new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(TEST)));
+         RightsRolesRepository rightRolesRepository = new RightsRolesRepositoryMySQL(new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(TEST)).getConnection());
+         repository = new UserRepositoryMySql(new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(TEST)), rightRolesRepository);
     }
 
     @Before
@@ -37,7 +40,7 @@ public class UserRepositoryMySqlTester {
 
     @Test
     public void testFindUserById(){
-        User user = repository.findById(2);
+        User user = repository.findById(2).getResult();
         assertEquals(user.getUsername(), "user-mihai");
         assertEquals(user.getPassword(),"pass2");
         assertEquals(user.getId(), 2);
@@ -45,7 +48,7 @@ public class UserRepositoryMySqlTester {
 
     @Test
     public void testUpdateUser(){
-        User user = repository.findById(2);
+        User user = repository.findById(2).getResult();
         user.setUsername("newname");
         user.setPassword("newpass");
         repository.update(user);
@@ -56,15 +59,15 @@ public class UserRepositoryMySqlTester {
 
     @Test
     public void testDeleteUser(){
-        repository.deleteById(repository.findById(2));
-        assertEquals(repository.findById(2).getId(), 0);
+        repository.deleteById(repository.findById(2).getResult());
+        assertEquals(repository.findById(2).getResult().getId(), 0);
     }
 
     @Test
     public void testInsert(){
         List<User> users = repository.findAll();
         repository.add((new UserBuilder()).setUsername("logofat").setPassword("auri").build());
-        User user = repository.findById(users.size() + 1);
+        User user = repository.findById(users.size() + 1).getResult();
         assertNotNull(user);
     }
 

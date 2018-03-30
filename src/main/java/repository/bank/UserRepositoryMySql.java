@@ -3,6 +3,8 @@ package repository.bank;
 import database.JDBConnectionWrapper;
 import model.User;
 import model.builder.UserBuilder;
+import model.validator.Notification;
+import repository.security.RightsRolesRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,9 +13,11 @@ import java.util.List;
 public class UserRepositoryMySql implements UserRepository {
 
     private JDBConnectionWrapper connectionWrapper;
+    private final RightsRolesRepository rightsRolesRepository;
 
-    public UserRepositoryMySql(JDBConnectionWrapper connectionWrapper){
+    public UserRepositoryMySql(JDBConnectionWrapper connectionWrapper, RightsRolesRepository rightsRolesRepository){
         this.connectionWrapper = connectionWrapper;
+        this.rightsRolesRepository = rightsRolesRepository;
     }
 
 
@@ -81,6 +85,32 @@ public class UserRepositoryMySql implements UserRepository {
     }
 
     @Override
+    public  Notification<User> findByUsernameAndPassword(String username, String password) {
+        Notification<User> findByUsernameAndPasswordNotification = new Notification<>();
+        Connection connection = connectionWrapper.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement( "Select * from `User` where `username`=? and `password`= ?;");
+            statement.setString(1,username);
+            statement.setString(2, password);
+
+            ResultSet userResultSet = statement.executeQuery();
+            userResultSet.next();
+
+            User user = new UserBuilder()
+                    .setUsername(userResultSet.getString("username"))
+                    .setPassword(userResultSet.getString("password"))
+                    .setRoles(rightsRolesRepository.findRolesForUser(userResultSet.getLong("id")))
+                    .build();
+            findByUsernameAndPasswordNotification.setResult(user);
+            return findByUsernameAndPasswordNotification;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            findByUsernameAndPasswordNotification.addError("Invalid email or password!");
+            return findByUsernameAndPasswordNotification;
+        }
+    }
+
+    @Override
     public List<User> findAll() {
         Connection connection = connectionWrapper.getConnection();
 
@@ -105,9 +135,9 @@ public class UserRepositoryMySql implements UserRepository {
     }
 
     @Override
-    public User findById(int id) {
+    public Notification<User> findById(int id) {
         Connection connection = connectionWrapper.getConnection();
-
+        Notification<User> findByIdNotification = new Notification<>();
         User user = new User();
         try {
             PreparedStatement statement = connection.prepareStatement(
@@ -118,15 +148,17 @@ public class UserRepositoryMySql implements UserRepository {
                             "WHERE `id` = ?;");
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
-            while (rs.next())
+            if (rs.next())
             {
                 user =  getUserFromResultSet(rs);
             }
+            findByIdNotification.setResult(user);
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            findByIdNotification.addError("User not found");
         }
-        return user;
+        return findByIdNotification;
     }
 
     private User getUserFromResultSet(ResultSet rs) throws SQLException {
@@ -139,4 +171,5 @@ public class UserRepositoryMySql implements UserRepository {
                 .setUsername(username)
                 .build();
     }
+
 }

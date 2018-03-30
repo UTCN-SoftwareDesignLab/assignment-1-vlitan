@@ -1,29 +1,27 @@
 package service;
 
-import model.Client;
+import model.Account;
 import model.validator.AccountValidator;
-import model.validator.ClientValidator;
 import model.validator.Notification;
 import repository.bank.AccountRepository;
-import repository.bank.ClientRepository;
 
 import java.util.List;
 
-public class ClientServiceImpl implements ClientService {
-    private ClientRepository clientRepository;
+public class AccoutServiceMySql implements AccountService {
+    private AccountRepository accountRepository;
 
-    public ClientServiceImpl(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public AccoutServiceMySql(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
     @Override
-    public Notification<Boolean> add(Client client) {
-        ClientValidator validator = new ClientValidator();
+    public Notification<Boolean> add(Account account) {
+        AccountValidator validator = new AccountValidator();
         Notification<Boolean> addNotification = new Notification<>();
-        boolean isValid = validator.validate(client);
+        boolean isValid = validator.validate(account);
 
         if (isValid) {
-            clientRepository.add(client);
+            accountRepository.add(account);
             addNotification.setResult(Boolean.TRUE);
         } else {
             validator.getErrors().forEach(addNotification::addError);
@@ -33,30 +31,30 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Notification<Boolean> delete(Client client) {
-        ClientValidator validator = new ClientValidator();
+    public Notification<Boolean> delete(Account account) {
+        AccountValidator validator = new AccountValidator();
         Notification<Boolean> deleteNotification = new Notification<>();
-        boolean isValid = validator.validate(client);
+        boolean isValid = validator.validate(account);
 
         if (isValid) {
-            clientRepository.deleteById(client);
+            accountRepository.delete(account);
             deleteNotification.setResult(Boolean.TRUE);
         } else {
             validator.getErrors().forEach(deleteNotification::addError);
             deleteNotification.setResult(Boolean.FALSE);
         }
         return deleteNotification;
+
     }
 
     @Override
-    public Notification<Boolean> update(Client client) {
-
-        ClientValidator validator = new ClientValidator();
+    public Notification<Boolean> update(Account account) {
+        AccountValidator validator = new AccountValidator();
         Notification<Boolean> updateNotification = new Notification<>();
-        boolean isValid = validator.validate(client);
+        boolean isValid = validator.validate(account);
 
         if (isValid) {
-            clientRepository.update(client);
+            accountRepository.update(account);
             updateNotification.setResult(Boolean.TRUE);
         } else {
             validator.getErrors().forEach(updateNotification::addError);
@@ -66,7 +64,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> findAll() {
-        return clientRepository.findAll();
+    public List<Account> findAll() {
+        return accountRepository.findAll();
     }
 }
+

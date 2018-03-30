@@ -19,7 +19,7 @@ public class AccountValidator {
         return errors.isEmpty();
     }
 
-    public void validateAmount(int amount){
+    private void validateAmount(int amount){
         if (amount < MIN_AMOUNT_OF_MONEY) {
             errors.add(String.format("account can`t an amount of money less than %d", MIN_AMOUNT_OF_MONEY));
         }

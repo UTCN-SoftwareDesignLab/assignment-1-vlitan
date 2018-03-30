@@ -1,5 +1,7 @@
 package service;
 
+import model.validator.Notification;
+
 public interface BillService {
-    public boolean payBill();
+    public Notification<Boolean> payBill();
 }
