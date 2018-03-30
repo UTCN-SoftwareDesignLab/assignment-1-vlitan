@@ -5,7 +5,6 @@ import database.JDBConnectionWrapper;
 import database.JDBSchemaStringFactory;
 import model.Account;
 import model.AccountType;
-import model.Client;
 import model.builder.AccountBuilder;
 import model.builder.ClientBuilder;
 import org.junit.Before;

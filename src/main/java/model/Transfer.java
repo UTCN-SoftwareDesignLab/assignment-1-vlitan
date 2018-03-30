@@ -2,14 +2,11 @@ package model;
 
 import java.sql.Date;
 
-public class Transfer {
+public class Transfer extends Action{
 
-    private int id;
     private int amount;
     private Account sourceAccount;
     private Account destinationAccount;
-    private Date date;
-    private int userId;
 
     public Transfer(){
     }
@@ -18,28 +15,13 @@ public class Transfer {
         this.amount = amount;
         this.sourceAccount = sourceAccount;
         this.destinationAccount = destinationAccount;
-        this.date = date;
-        this.userId = userId;
+        this.setDate(date);
+        this.setUserId(userId);
     }
 
     public Transfer(int id, int amount, Account sourceAccount, Account destinationAccount, Date date, int userId) {
         this(amount, sourceAccount, destinationAccount, date, userId);
-        this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.setId(id);
     }
 
     public int getAmount() {
@@ -66,11 +48,8 @@ public class Transfer {
         this.destinationAccount = destinationAccount;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    @Override
+    public String getDescription(){
+        return "" + amount + " transfered from account " + sourceAccount.getId() + " to account " + destinationAccount.getId();
     }
 }

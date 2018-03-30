@@ -1,44 +1,40 @@
 package repository.bank;
 
 import database.JDBConnectionWrapper;
-import model.Account;
+import model.Action;
 import model.Transfer;
 import model.User;
-import model.builder.TransferBuilder;
+import model.builder.ActionBuilder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransferRepositoryMySql implements TransferRepository{
+public class ActionRepositoryMySql implements ActionRepository {
 
     private JDBConnectionWrapper connectionWrapper;
     private AccountRepository accountRepository;
-    public TransferRepositoryMySql(JDBConnectionWrapper connectionWrapper){
+    public ActionRepositoryMySql(JDBConnectionWrapper connectionWrapper){
         this.connectionWrapper = connectionWrapper;
         accountRepository = new AccountRepositoryMySql(connectionWrapper);
     }
 
     @Override
-    public boolean addTransfer(Transfer transfer) {
+    public boolean addAction(Action action) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Account (`id`,\n" +
+                    "INSERT INTO Action\n" +
                             "(`id`,\n" +
-                            "`amount`,\n" +
-                            "`source_account_id`,\n" +
-                            "`destination_account_id`,\n" +
+                            "`description`,\n" +
                             "`date`,\n" +
                             "`User_id`)"+
                             "VALUES" +
-                            "(null, ?, ?, ?, ?, ?)");
-            statement.setInt(1, transfer.getAmount());
-            statement.setInt(2, transfer.getSourceAccount().getId());
-            statement.setInt(3, transfer.getDestinationAccount().getId());
-            statement.setDate(4, transfer.getDate());
-            statement.setInt(5, transfer.getUserId());
+                            "(null, ?, ?, ?)");
+            statement.setString(1, action.getDescription());
+            statement.setDate(2, action.getDate());
+            statement.setInt(3, action.getUserId());
 
             statement.execute();
             return true;
@@ -50,22 +46,21 @@ public class TransferRepositoryMySql implements TransferRepository{
 
 
     @Override
-    public boolean updateTransfer(Transfer transfer) {
+    public boolean updateAction(Action action) {
         Connection connection = connectionWrapper.getConnection();
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "   UPDATE `bank_test`.`Transfer`\n" +
+                    "   UPDATE `Action`\n" +
                             "    SET\n" +
-                            "       `amount` = ?,\n" +
-                            "       `source_account_id` = ?,\n" +
-                            "       `destination_account_id` = ?,\n" +
+                            "       `description` = ?,\n" +
                             "       `date` = ?,\n" +
+                            "       `User_id` = ?\n" +
                             "    WHERE `id` = ?");
-            statement.setInt(1, transfer.getAmount());
-            statement.setInt(2, transfer.getSourceAccount().getId());
-            statement.setInt(3, transfer.getDestinationAccount().getId());
-            statement.setDate(4, transfer.getDate());
+            statement.setString(1, action.getDescription());
+            statement.setDate(2, action.getDate());
+            statement.setInt(3, action.getUserId());
+            statement.setInt(4, action.getId());
 
             statement.execute();
             return true;
@@ -76,76 +71,74 @@ public class TransferRepositoryMySql implements TransferRepository{
     }
 
     @Override
-    public List<Transfer> findAllTransfers() {
+    public List<Action> findAllActions() {
         Connection connection = connectionWrapper.getConnection();
-        List<Transfer> transfers = new ArrayList<Transfer>();
+        List<Action> actions = new ArrayList<>();
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM Transfer");
+                    "SELECT * FROM Action");
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
-                transfers.add(getTransferFromResultSet(rs));
+                actions.add(getActionFromResultSet(rs));
             }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return transfers;
+        return actions;
     }
 
     @Override
-    public Transfer findTransferById(int id) {
+    public Action findActionById(int id) {
         Connection connection = connectionWrapper.getConnection();
-        Transfer transfer = new Transfer();
+        Action action = new Action();
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM Transfer WHERE `id` = ?");
+                    "SELECT * FROM Action WHERE `id` = ?");
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
-            transfer = getTransferFromResultSet(rs);
+            if (rs.next()) {
+                action = getActionFromResultSet(rs);
+            }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return transfer;
+        return action;
     }
 
     @Override
-    public List<Transfer> findByUser(User user) {
+    public List<Action> findByUser(User user) {
         Connection connection = connectionWrapper.getConnection();
-        List<Transfer> transfers = new ArrayList<Transfer>();
+        List<Action> actions = new ArrayList<>();
 
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM Transfer WHERE `User_id` = ?");
+                    "SELECT * FROM Action WHERE `User_id` = ?");
             statement.setInt(1, user.getId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
-                transfers.add(getTransferFromResultSet(rs));
+                actions.add(getActionFromResultSet(rs));
             }
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return transfers;
+        return actions;
     }
 
-    private Transfer getTransferFromResultSet(ResultSet rs) throws SQLException{
+    private Action getActionFromResultSet(ResultSet rs) throws SQLException{
         int id = rs.getInt("id");
-        int amount = rs.getInt("id");
-        Account sourceAccount = accountRepository.findAccountById(rs.getInt("source_account_id"));
-        Account destinationAccount = accountRepository.findAccountById(rs.getInt("destination_account_id"));
+        String description = rs.getString("description");
         Date date = rs.getDate("date");
         int userId = rs.getInt("User_id");
-        return (new TransferBuilder())
+        return (new ActionBuilder())
                 .setId(id)
-                .setAmount(amount)
-                .setSourceAccount(sourceAccount)
-                .setDestinationAccount(destinationAccount)
+                .setDescription(description)
                 .setDate(date)
-                .setUserid(userId)
+                .setUserId(userId)
                 .build();
     }
 }

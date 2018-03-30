@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be57c1c5-4c15-40c3-8b93-2b0be2314f48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/repository/AccountRepositoryMySqlTester.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/repository/TransferRepositoryMySqlTester.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/model/Action.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/model/CudOnClient.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/repository/ActionRepositoryMySqlTester.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/repository/TransferRepositoryMySqlTester.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/model/builder/TransferBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/model/builder/ActionBuilder.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/repository/bank/TransferRepository.java" afterPath="$PROJECT_DIR$/src/main/java/repository/bank/ActionRepository.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/repository/bank/TransferRepositoryMySql.java" afterPath="$PROJECT_DIR$/src/main/java/repository/bank/ActionRepositoryMySql.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/database/Bootstrap.java" afterPath="$PROJECT_DIR$/src/main/java/database/Bootstrap.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/database/SqlQueryFactory.java" afterPath="$PROJECT_DIR$/src/main/java/database/SqlQueryFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/repository/bank/AccountHasTransferRepository.java" afterPath="$PROJECT_DIR$/src/main/java/repository/bank/AccountHasTransferRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/repository/bank/AccountRepositoryMySql.java" afterPath="$PROJECT_DIR$/src/main/java/repository/bank/AccountRepositoryMySql.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/database/TableName.java" afterPath="$PROJECT_DIR$/src/main/java/database/TableName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/model/Transfer.java" afterPath="$PROJECT_DIR$/src/main/java/model/Transfer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/repository/AccountRepositoryMySqlTester.java" afterPath="$PROJECT_DIR$/src/test/java/repository/AccountRepositoryMySqlTester.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks" afterPath="$PROJECT_DIR$/tasks" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -21,6 +27,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/artifact1$ActionRepositoryMySqlTester_findByUserTest.coverage" NAME="ActionRepositoryMySqlTester.findByUserTest Coverage Results" MODIFIED="1522394370489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>repository.*</FILTER>
+    </SUITE>
+  </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -30,57 +41,24 @@
     <favorites_list name="artifact1" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5793404">
+    <splitter split-orientation="horizontal" split-proportion="0.5172181">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="AccountRepositoryMySql.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/AccountRepositoryMySql.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="364">
-                  <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#3159#3168#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ClientRepositoryMySqlTester.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/test/java/repository/ClientRepositoryMySqlTester.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="556">
-                  <caret line="61" column="52" lean-forward="false" selection-start-line="61" selection-start-column="52" selection-end-line="61" selection-end-column="52" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ResultSetImpl.class" pinned="false" current-in-tab="false">
-            <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.6/380ef5226de2c85ff3b38cbfefeea881c5fce09d/mysql-connector-java-5.1.6.jar!/com/mysql/jdbc/ResultSetImpl.class">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="164">
-                  <caret line="3723" column="0" lean-forward="false" selection-start-line="3723" selection-start-column="0" selection-end-line="3723" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ClientRepository.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ClientRepository.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="60">
-                  <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="AccountRepositoryMySqlTester.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test/java/repository/AccountRepositoryMySqlTester.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="229">
-                  <caret line="35" column="5" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="35" selection-end-column="5" />
+                <state relative-caret-position="300">
+                  <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="44" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ActionRepositoryMySqlTester.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/test/java/repository/ActionRepositoryMySqlTester.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="785">
+                  <caret line="75" column="20" lean-forward="false" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -88,23 +66,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TransferRepositoryMySqlTester.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/test/java/repository/TransferRepositoryMySqlTester.java">
+          <file leaf-file-name="Bootstrap.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/database/Bootstrap.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="379">
-                  <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="BuilderTester.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/test/java/model/builder/BuilderTester.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-300">
-                  <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+                <state relative-caret-position="200">
+                  <caret line="30" column="34" lean-forward="true" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
                   <folding />
                 </state>
               </provider>
@@ -113,8 +79,8 @@
           <file leaf-file-name="ClientRepositoryMySql.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ClientRepositoryMySql.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="319">
-                  <caret line="138" column="37" lean-forward="true" selection-start-line="138" selection-start-column="37" selection-end-line="138" selection-end-column="37" />
+                <state relative-caret-position="206">
+                  <caret line="105" column="6" lean-forward="false" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -133,8 +99,18 @@
           <file leaf-file-name="SqlQueryFactory.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/database/SqlQueryFactory.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="383">
-                  <caret line="103" column="100" lean-forward="true" selection-start-line="103" selection-start-column="100" selection-end-line="103" selection-end-column="100" />
+                <state relative-caret-position="-204">
+                  <caret line="47" column="57" lean-forward="true" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TableName.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/database/TableName.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="105">
+                  <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -147,18 +123,31 @@
           <file leaf-file-name="Transfer.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/model/Transfer.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+                <state relative-caret-position="350">
+                  <caret line="30" column="18" lean-forward="false" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TransferRepositoryMySql.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/TransferRepositoryMySql.java">
+          <file leaf-file-name="CudOnClient.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/model/CudOnClient.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1061">
-                  <caret line="125" column="40" lean-forward="false" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
+                <state relative-caret-position="135">
+                  <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#107#108#0" expanded="true" />
+                    <element signature="e#168#169#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ActionRepositoryMySql.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ActionRepositoryMySql.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="86">
+                  <caret line="57" column="54" lean-forward="true" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -166,11 +155,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="TransferRepository.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/TransferRepository.java">
+          <file leaf-file-name="ActionRepository.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ActionRepository.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
-                  <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="41" />
+                <state relative-caret-position="90">
+                  <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ActionBuilder.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/model/builder/ActionBuilder.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="210">
+                  <caret line="20" column="28" lean-forward="false" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
                   <folding />
                 </state>
               </provider>
@@ -214,6 +213,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>bank_test.Account</find>
+      <find>Transfer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -506,12 +506,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/database/ConnectionTester.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/model/AccountType.java" />
-        <option value="$PROJECT_DIR$/src/main/java/model/validator/Notification.java" />
-        <option value="$PROJECT_DIR$/src/main/java/model/validator/ResultFetchException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/model/validator/UserValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/validator/AccountValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/validator/ClientValidator.java" />
         <option value="$PROJECT_DIR$/src/test/java/model/builder/AccountTester.java" />
@@ -533,12 +527,9 @@
         <option value="$PROJECT_DIR$/src/main/java/repository/AccountRepositoryMySql.java" />
         <option value="$PROJECT_DIR$/src/test/java/model/builder/BuilderTester.java" />
         <option value="/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/java/lang/ClassLoader.class" />
-        <option value="$PROJECT_DIR$/src/main/java/database/TableName.java" />
         <option value="$PROJECT_DIR$/src/test/java/repository/UserRepositoryMySqlTester.java" />
-        <option value="$PROJECT_DIR$/src/main/java/database/Bootstrap.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/ClientRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/ClientRepositoryMySql.java" />
-        <option value="$PROJECT_DIR$/src/test/java/repository/ClientRepositoryMySqlTester.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/AccountRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/TransferRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/builder/AccountBuilder.java" />
@@ -547,24 +538,32 @@
         <option value="$PROJECT_DIR$/src/main/java/repository/UserRepositoryMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/bank/UserRepositoryMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/model/Account.java" />
-        <option value="$PROJECT_DIR$/src/main/java/repository/bank/TransferRepositoryMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/bank/AccountHasTransferMySql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/model/Transfer.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/bank/AccountHasTransferRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/database/SqlQueryFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/bank/AccountRepositoryMySql.java" />
         <option value="$PROJECT_DIR$/src/main/java/repository/bank/ClientRepositoryMySql.java" />
         <option value="$PROJECT_DIR$/src/test/java/repository/AccountRepositoryMySqlTester.java" />
         <option value="$PROJECT_DIR$/src/test/java/repository/TransferRepositoryMySqlTester.java" />
+        <option value="$PROJECT_DIR$/src/main/java/repository/bank/TransferRepositoryMySql.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/Transfer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/CudOnClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/database/TableName.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/builder/ActionBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/repository/bank/ActionRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/model/Action.java" />
+        <option value="$PROJECT_DIR$/src/main/java/database/SqlQueryFactory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/database/Bootstrap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/repository/bank/ActionRepositoryMySql.java" />
+        <option value="$PROJECT_DIR$/src/test/java/repository/ActionRepositoryMySqlTester.java" />
+        <option value="$PROJECT_DIR$/src/test/java/repository/ClientRepositoryMySqlTester.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1920" />
-    <option name="y" value="26" />
-    <option name="width" value="1920" />
-    <option name="height" value="1053" />
+    <option name="y" value="27" />
+    <option name="width" value="959" />
+    <option name="height" value="1052" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -741,8 +740,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AccountRepositoryMySqlTester">
-    <configuration name="AccountRepositoryMySqlTester" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in artifact1_test">
+    <configuration name="ActionRepositoryMySqlTester.findByUserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="repository.*" />
@@ -753,9 +752,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="repository" />
-      <option name="MAIN_CLASS_NAME" value="repository.AccountRepositoryMySqlTester" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="repository.ActionRepositoryMySqlTester" />
+      <option name="METHOD_NAME" value="findByUserTest" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -767,7 +766,7 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="AccountRepositoryMySqlTester.insertAndFindTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ActionRepositoryMySqlTester.updateAndFindAction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="repository.*" />
@@ -778,8 +777,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="repository" />
-      <option name="MAIN_CLASS_NAME" value="repository.AccountRepositoryMySqlTester" />
-      <option name="METHOD_NAME" value="insertAndFindTest" />
+      <option name="MAIN_CLASS_NAME" value="repository.ActionRepositoryMySqlTester" />
+      <option name="METHOD_NAME" value="updateAndFindAction" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -812,24 +811,30 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="Bootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ClientRepositoryMySqlTester" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="database.SqlQueryFactory" />
+          <option name="PATTERN" value="repository.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="database.Bootstrap" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="artifact1_test" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="PACKAGE_NAME" value="repository" />
+      <option name="MAIN_CLASS_NAME" value="repository.ClientRepositoryMySqlTester" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="artifact1_main" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
       <envs />
+      <patterns />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
@@ -937,19 +942,19 @@
       <patterns />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.Bootstrap" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.AccountRepositoryMySqlTester" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.AccountRepositoryMySqlTester.insertAndFindTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.repository in artifact1_test" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.repository in artifact1_test" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ActionRepositoryMySqlTester.findByUserTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ActionRepositoryMySqlTester.updateAndFindAction" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ClientRepositoryMySqlTester" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.All in artifact1_test" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.AccountRepositoryMySqlTester" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.repository in artifact1_test" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.All in artifact1_test" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.AccountRepositoryMySqlTester.insertAndFindTest" />
-        <item index="4" class="java.lang.String" itemvalue="Application.Bootstrap" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.All in artifact1_test" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ClientRepositoryMySqlTester" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.repository in artifact1_test" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ActionRepositoryMySqlTester.findByUserTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ActionRepositoryMySqlTester.updateAndFindAction" />
       </list>
     </recent_temporary>
   </component>
@@ -970,39 +975,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AccountRepositoryMySqlTester - 2018.03.29 at 23h 28m 18s.xml">
-      <configuration name="AccountRepositoryMySqlTester" configurationId="JUnit" />
+    <history-entry file="ActionRepositoryMySqlTester - 2018.03.30 at 10h 15m 09s.xml">
+      <configuration name="ActionRepositoryMySqlTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountRepositoryMySqlTester - 2018.03.29 at 23h 28m 58s.xml">
-      <configuration name="AccountRepositoryMySqlTester" configurationId="JUnit" />
+    <history-entry file="ActionRepositoryMySqlTester - 2018.03.30 at 10h 15m 43s.xml">
+      <configuration name="ActionRepositoryMySqlTester" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountRepositoryMySqlTester - 2018.03.29 at 23h 31m 54s.xml">
-      <configuration name="AccountRepositoryMySqlTester" configurationId="JUnit" />
+    <history-entry file="ActionRepositoryMySqlTester_findByUserTest - 2018.03.30 at 10h 19m 30s.xml">
+      <configuration name="ActionRepositoryMySqlTester.findByUserTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountRepositoryMySqlTester - 2018.03.29 at 23h 48m 25s.xml">
-      <configuration name="AccountRepositoryMySqlTester" configurationId="JUnit" />
+    <history-entry file="ActionRepositoryMySqlTester_findByUserTest - 2018.03.30 at 10h 19m 32s.xml">
+      <configuration name="ActionRepositoryMySqlTester.findByUserTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountRepositoryMySqlTester - 2018.03.29 at 23h 53m 12s.xml">
-      <configuration name="AccountRepositoryMySqlTester" configurationId="JUnit" />
+    <history-entry file="ActionRepositoryMySqlTester_findByUserTest - 2018.03.30 at 10h 19m 42s.xml">
+      <configuration name="ActionRepositoryMySqlTester.findByUserTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountRepositoryMySqlTester - 2018.03.29 at 23h 55m 39s.xml">
-      <configuration name="AccountRepositoryMySqlTester" configurationId="JUnit" />
+    <history-entry file="ActionRepositoryMySqlTester_updateAndFindAction - 2018.03.30 at 10h 19m 33s.xml">
+      <configuration name="ActionRepositoryMySqlTester.updateAndFindAction" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="AccountRepositoryMySqlTester - 2018.03.30 at 00h 38m 18s.xml">
-      <configuration name="AccountRepositoryMySqlTester" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_artifact1_test - 2018.03.30 at 00h 04m 01s.xml">
+    <history-entry file="All_in_artifact1_test - 2018.03.30 at 10h 23m 23s.xml">
       <configuration name="All in artifact1_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="repository_in_artifact1_test - 2018.03.29 at 23h 30m 55s.xml">
+    <history-entry file="ClientRepositoryMySqlTester - 2018.03.30 at 10h 22m 33s.xml">
+      <configuration name="ClientRepositoryMySqlTester" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="repository_in_artifact1_test - 2018.03.30 at 10h 17m 44s.xml">
       <configuration name="repository in artifact1_test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="repository_in_artifact1_test - 2018.03.30 at 00h 05m 43s.xml">
+    <history-entry file="repository_in_artifact1_test - 2018.03.30 at 10h 20m 09s.xml">
       <configuration name="repository in artifact1_test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="26" width="1920" height="1053" extended-state="6" />
+    <frame x="0" y="26" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1013,9 +1018,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29652998" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16302083" sideWeight="0.69138753" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22864583" sideWeight="0.69138753" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1035,25 +1041,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/validator/Notification.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/validator/ResultFetchException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/Schema.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1156,14 +1148,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/database/TableName.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar!/sun/misc/Launcher.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -1216,16 +1200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/builder/TransferBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="21" column="5" lean-forward="false" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/UserRepositoryMySql.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1233,24 +1207,6 @@
           <folding>
             <element signature="imports" expanded="false" />
             <element signature="e#2710#2716#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/Transfer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/TransferRepositoryMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1061">
-          <caret line="125" column="40" lean-forward="false" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1279,32 +1235,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/repository/UserRepositoryMySqlTester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="641">
-          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/AccountRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/database/Bootstrap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="46" column="6" lean-forward="false" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#651#659#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1375,50 +1310,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/repository/ClientRepositoryMySqlTester.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="61" column="52" lean-forward="false" selection-start-line="61" selection-start-column="52" selection-end-line="61" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/database/SqlQueryFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="103" column="100" lean-forward="true" selection-start-line="103" selection-start-column="100" selection-end-line="103" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/model/AccountType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="14" lean-forward="true" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ClientRepositoryMySql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="138" column="37" lean-forward="true" selection-start-line="138" selection-start-column="37" selection-end-line="138" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ClientRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/TransferRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="12" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1431,20 +1326,144 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/AccountType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="14" lean-forward="true" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Transfer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="30" column="18" lean-forward="false" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/TableName.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/CudOnClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding>
+            <element signature="e#107#108#0" expanded="true" />
+            <element signature="e#168#169#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ActionRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/repository/AccountRepositoryMySqlTester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="35" selection-end-column="5" />
+        <state relative-caret-position="300">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ActionRepositoryMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="57" column="54" lean-forward="true" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/repository/TransferRepositoryMySqlTester.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/builder/ActionBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="210">
+          <caret line="20" column="28" lean-forward="false" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/SqlQueryFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="47" column="57" lean-forward="true" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/model/Action.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#212#213#0" expanded="true" />
+            <element signature="e#258#259#0" expanded="true" />
+            <element signature="e#284#285#0" expanded="true" />
+            <element signature="e#309#310#0" expanded="true" />
+            <element signature="e#342#343#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#399#400#0" expanded="true" />
+            <element signature="e#426#427#0" expanded="true" />
+            <element signature="e#464#465#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#596#597#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#668#669#0" expanded="true" />
+            <element signature="e#707#708#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/repository/UserRepositoryMySqlTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/Bootstrap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="30" column="34" lean-forward="true" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/repository/bank/ClientRepositoryMySql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="105" column="6" lean-forward="false" selection-start-line="105" selection-start-column="6" selection-end-line="105" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/repository/ClientRepositoryMySqlTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="55" column="37" lean-forward="true" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/repository/ActionRepositoryMySqlTester.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="785">
+          <caret line="75" column="20" lean-forward="false" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

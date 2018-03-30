@@ -35,12 +35,10 @@ public class SqlQueryFactory {
                             "DEFAULT CHARACTER SET = latin1;\n" +
                             "\n" +
                             "CREATE INDEX `fk_Account_Client1_idx` ON `Account` (`Client_id` ASC);";
-            case TRANSFER: return
-                    "CREATE TABLE IF NOT EXISTS `Transfer` (\n" +
+            case ACTION: return
+                    "CREATE TABLE IF NOT EXISTS `Action` (\n" +
                             "  `id` INT(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "  `amount` INT(11) NOT NULL,\n" +
-                            "  `source_account_id` INT(11) NOT NULL,\n" +
-                            "  `destination_account_id` INT(11) NOT NULL,\n" +
+                            "  `description` VARCHAR(45) NOT NULL,\n" +
                             "  `date` DATE NOT NULL,\n" +
                             "  `User_id` INT(11) NOT NULL,\n" +
                             "  PRIMARY KEY (`id`, `User_id`),\n" +
@@ -52,30 +50,7 @@ public class SqlQueryFactory {
                             "ENGINE = InnoDB\n" +
                             "DEFAULT CHARACTER SET = latin1;\n" +
                             "\n" +
-                            "CREATE INDEX `fk_Transfer_User1_idx` ON `Transfer` (`User_id` ASC);";
-            case ACCOUNT_HAS_TRANSFER : return
-                    "CREATE TABLE IF NOT EXISTS `Account_has_Transfer` (\n" +
-                            "  `Account_id` INT(11) NOT NULL,\n" +
-                            "  `Account_Client_id` INT(11) NOT NULL,\n" +
-                            "  `Transfer_id` INT(11) NOT NULL,\n" +
-                            "  `Transfer_User_id` INT(11) NOT NULL,\n" +
-                            "  PRIMARY KEY (`Account_id`, `Account_Client_id`, `Transfer_id`, `Transfer_User_id`),\n" +
-                            "  CONSTRAINT `fk_Account_has_Transfer_Account1`\n" +
-                            "    FOREIGN KEY (`Account_id` , `Account_Client_id`)\n" +
-                            "    REFERENCES `Account` (`id` , `Client_id`)\n" +
-                            "    ON DELETE NO ACTION\n" +
-                            "    ON UPDATE NO ACTION,\n" +
-                            "  CONSTRAINT `fk_Account_has_Transfer_Transfer1`\n" +
-                            "    FOREIGN KEY (`Transfer_id` , `Transfer_User_id`)\n" +
-                            "    REFERENCES `Transfer` (`id` , `User_id`)\n" +
-                            "    ON DELETE NO ACTION\n" +
-                            "    ON UPDATE NO ACTION)\n" +
-                            "ENGINE = InnoDB\n" +
-                            "DEFAULT CHARACTER SET = latin1;\n" +
-                            "\n" +
-                            "CREATE INDEX `fk_Account_has_Transfer_Transfer1_idx` ON `Account_has_Transfer` (`Transfer_id` ASC, `Transfer_User_id` ASC);\n" +
-                            "\n" +
-                            "CREATE INDEX `fk_Account_has_Transfer_Account1_idx` ON `Account_has_Transfer` (`Account_id` ASC, `Account_Client_id` ASC);";
+                            "CREATE INDEX `fk_Transfer_User1_idx` ON `Action` (`User_id` ASC);";
 
             default:
                 return  "SELECT 1;";
@@ -107,7 +82,10 @@ public class SqlQueryFactory {
                     "INSERT INTO `Account` (`account_type`,`amount`,`creation_date`,`Client_id`)VALUES('CREDIT',2,'1901-03-02',1);\n" +
                     "INSERT INTO `Account` (`account_type`,`amount`,`creation_date`,`Client_id`)VALUES('DEBIT',43,'1944-03-02',1);\n" +
                     "INSERT INTO `Account` (`account_type`,`amount`,`creation_date`,`Client_id`)VALUES('CREDIT',5,'1905-03-02',2);";
-            case TRANSFER: return "SELECT 1;";
+            case ACTION: return
+                    "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description1','1901-03-02',2);\n" +
+                    "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description2','1931-03-02',2);\n" +
+                    "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description3','1981-03-02',1);\n";
             default:
                 return  "SELECT 1;";
 

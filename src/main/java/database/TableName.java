@@ -4,7 +4,7 @@ public enum TableName {
     USER,
     ROLE,
     CLIENT,
-    TRANSFER,
+    ACTION,
     ACCOUNT,
     RIGHT,
     ROLE_RIGHT,
