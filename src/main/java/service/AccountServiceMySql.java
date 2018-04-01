@@ -7,10 +7,10 @@ import repository.bank.AccountRepository;
 
 import java.util.List;
 
-public class AccoutServiceMySql implements AccountService {
+public class AccountServiceMySql implements AccountService {
     private AccountRepository accountRepository;
 
-    public AccoutServiceMySql(AccountRepository accountRepository) {
+    public AccountServiceMySql(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
@@ -44,7 +44,6 @@ public class AccoutServiceMySql implements AccountService {
             deleteNotification.setResult(Boolean.FALSE);
         }
         return deleteNotification;
-
     }
 
     @Override

@@ -1,5 +1,9 @@
 package database;
 
+import static database.Constants.Rights.*;
+import static database.Constants.Roles.ADMINISTRATOR;
+import static database.Constants.Roles.USER;
+
 public class SqlQueryFactory {
     public static String getCreateSQLForTable(TableName table) {
         switch (table) {
@@ -15,7 +19,7 @@ public class SqlQueryFactory {
             case USER: return "CREATE TABLE IF NOT EXISTS `User` (\n" +
                     "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                     "  `username` VARCHAR(45) NOT NULL,\n" +
-                    "  `password` VARCHAR(45) NOT NULL,\n" +
+                    "  `password` VARCHAR(100) NOT NULL,\n" +
                     "  PRIMARY KEY (`id`))\n" +
                     "ENGINE = InnoDB;";
             case ACCOUNT: return
@@ -142,6 +146,26 @@ public class SqlQueryFactory {
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description2','1931-03-02',2);\n" +
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description2','1999-03-02',2);\n" +
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description3','1981-03-02',1);\n";
+//            case ROLE:return
+//                    "INSERT INTO `role`(`id`,`role`)VALUES(null,'"+ADMINISTRATOR+"';\n"+
+//                    "INSERT INTO `role`(`id`,`role`)VALUES(null,'"+USER+"';\n";
+//            case RIGHT:return
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+CREATE_CLIENT+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+DELETE_CLIENT+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+UPDATE_CLIENT+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+CREATE_USER+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+DELETE_USER+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+UPDATE_USER+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+CREATE_ACCOUNT+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+DELETE_ACCOUNT+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+UPDATE_ACCOUNT+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+MAKE_TRANSFER+"';\n"+
+//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+PAY_BILL+"';\n";
+//            case ROLE_RIGHT:return
+//                    "INSERT INTO `role_right`(`id`,`role`,`right`)VALUES(null,'"+ADMINISTRATOR+"','" +MAKE_TRANSFER+"';\n"+
+//                    "INSERT INTO `role_right`(`id`,`role`,`right`)VALUES(null,'"+PAY_BILL+"';\n";
+//            case USER_ROLE:return  "SELECT 1;";
+
             default:
                 return  "SELECT 1;";
 

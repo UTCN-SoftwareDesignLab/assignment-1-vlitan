@@ -30,11 +30,15 @@ public class UserRepositoryMySql implements UserRepository {
                     "INSERT INTO User (`id`,\n" +
                             "`username`,\n" +
                             "`password`\n" +
-                            ")VALUES(null, ?, ?)");
+                            ")VALUES(null, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUsername());
             statement.setString(2,user.getPassword());
-            statement.execute();
+            statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            generatedKeys.next();
+            user.setId(generatedKeys.getInt(1));
             statement.close();
+            rightsRolesRepository.addRolesToUser(user, user.getRoles());
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,17 +99,17 @@ public class UserRepositoryMySql implements UserRepository {
 
             ResultSet userResultSet = statement.executeQuery();
             userResultSet.next();
-
             User user = new UserBuilder()
-                    .setUsername(userResultSet.getString("username"))
-                    .setPassword(userResultSet.getString("password"))
-                    .setRoles(rightsRolesRepository.findRolesForUser(userResultSet.getLong("id")))
-                    .build();
+                        .setUsername(userResultSet.getString("username"))
+                        .setPassword(userResultSet.getString("password"))
+                        .setRoles(rightsRolesRepository.findRolesForUser(userResultSet.getLong("id")))
+                        .build();
             findByUsernameAndPasswordNotification.setResult(user);
-            return findByUsernameAndPasswordNotification;
         } catch (SQLException e) {
-            e.printStackTrace();
             findByUsernameAndPasswordNotification.addError("Invalid email or password!");
+            e.printStackTrace();
+        }
+        finally {
             return findByUsernameAndPasswordNotification;
         }
     }
