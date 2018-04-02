@@ -1,9 +1,14 @@
 package database;
 
 import com.sun.org.apache.bcel.internal.generic.TargetLostException;
+import model.Role;
+import model.User;
+import repository.bank.UserRepository;
+import repository.bank.UserRepositoryMySql;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,9 +35,10 @@ public class Bootstrap {
     private static final TableName[] ORDERED_TABLES = new TableName[]{CLIENT, USER, ACTION, ACCOUNT,  ROLE, RIGHT, ROLE_RIGHT, USER_ROLE};//ordered tables for creation
     private static final List<Schema> schemasToBootstrap = new ArrayList<Schema>(Arrays.asList(TEST));
     static RightsRolesRepository rightsRolesRepository;
-
+    static UserRepository userRepository;
     public static void main(String[] args) throws SQLException {
         rightsRolesRepository = new RightsRolesRepositoryMySQL(new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(TEST)).getConnection());
+        userRepository =  new UserRepositoryMySql(new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(TEST)), rightsRolesRepository);
         for (Schema schema : schemasToBootstrap) {
             dropAll(schema);
             bootstrapTables(schema);
@@ -120,7 +126,11 @@ public class Bootstrap {
     }
 
     private static void bootstrapUserRoles() throws SQLException {
-
+        List<User> users = userRepository.findAll();
+        List<Role> roles = new ArrayList<>(Arrays.asList(rightsRolesRepository.findRoleByTitle(Constants.Roles.USER)));
+        for (User user : users){
+            rightsRolesRepository.addRolesToUser(user, roles);
+        }
     }
 
 

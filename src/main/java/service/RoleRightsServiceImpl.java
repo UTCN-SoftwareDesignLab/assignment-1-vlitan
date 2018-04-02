@@ -21,7 +21,7 @@ public class RoleRightsServiceImpl implements RoleRightsService{
     public boolean hasRight(User user, String right) {
         List<String> allRights = new ArrayList<>();
         for(Role role : user.getRoles()){
-            allRights.addAll(rightsRolesRepository.findRightsByRole(role).stream().map(r->r.getRight()).collect(Collectors.toCollection(Collectors.toList())));
+            allRights.addAll(rightsRolesRepository.findRightsByRole(role).stream().map(Right::getRight).collect(Collectors.toList()));
         }
         return allRights.contains(right);
     }

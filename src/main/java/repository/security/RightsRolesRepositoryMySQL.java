@@ -118,7 +118,7 @@ public class RightsRolesRepositoryMySQL implements RightsRolesRepository {
         try {
             List<Role> roles = new ArrayList<>();
             Statement statement = connection.createStatement();
-            String fetchRoleSql = "Select * from user_role where `user_id`=\'" + userId + "\'";
+            String fetchRoleSql = "Select * from user_role where `user_id`=" + userId ;
             ResultSet userRoleResultSet = statement.executeQuery(fetchRoleSql);
             while (userRoleResultSet.next()) {
                 long roleId = userRoleResultSet.getLong("role_id");
@@ -149,11 +149,11 @@ public class RightsRolesRepositoryMySQL implements RightsRolesRepository {
         List<Right> rights = new ArrayList<>();
         try{
             PreparedStatement insertStatement = connection
-                    .prepareStatement("SELECT right.name\n" +
-                            "FROM right\n" +
-                            "INNER JOIN ON role.id = role_righ.role_id\n" +
-                            "INNER JOIN ON role_righ.right_id = right.id\n" +
-                            "WHERE role.id = ?");
+                    .prepareStatement("SELECT rt.`id`, rt.`right`\n" +
+                            "FROM `right` rt \n" +
+                            "JOIN `role_right` rr ON rt.`id` = rr.`right_id`\n" +
+                            "JOIN `role` rl ON rr.`role_id` = rl.`id`\n" +
+                            "WHERE rl.`id` = ?", Statement.RETURN_GENERATED_KEYS);
             insertStatement.setLong(1, role.getId());
             ResultSet rs = insertStatement.executeQuery();
             while(rs.next()){

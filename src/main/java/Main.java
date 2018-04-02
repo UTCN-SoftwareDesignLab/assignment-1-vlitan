@@ -15,6 +15,5 @@ public class Main {
         LoginController loginController = new LoginController(new LoginView(), componentFactory.getAuthenticationService());
         MainController mainController = new MainController(new UserView());
         loginController.addObserver(mainController);
-
     }
 }

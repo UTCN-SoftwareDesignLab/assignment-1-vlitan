@@ -49,26 +49,26 @@ public class UserView extends JFrame{
         add(tfLoggedUsername);
         add(taData);
 
-//        add(tfClientId);
-//        add(tfClientName);
-//        add(tfClienIdentityCardNumber);
-//        add(tfClientPersonalNumericalCode);
-//        add(tfClientAddress);
+        add(tfClientId);
+        add(tfClientName);
+        add(tfClienIdentityCardNumber);
+        add(tfClientPersonalNumericalCode);
+        add(tfClientAddress);
 
         add(btnInsertClient);
         add(btnFindAllClients);
         add(btnUpdateClient);
 
-//        add(cbType);
-//        add(tfAmount);
-//        add(tfOwnerId);
+        add(cbType);
+        add(tfAmount);
+        add(tfOwnerId);
 
         add(btnInsertAccount);
         add(btnFindAllAccounts);
         add(btnUpdateAccount);
 
-//        add(tfSourceAccountId);
-//        add(tfDestinationAccountId);
+        add(tfSourceAccountId);
+        add(tfDestinationAccountId);
 
         add(btnMakeTransfer);
         add(btnPayBill);
@@ -107,8 +107,24 @@ public class UserView extends JFrame{
         btnPayBill = new JButton("pay bill");
     }
 
-    public void setBtnInsertAccountActionListener(ActionListener actionListener){
+    public void setBtnFindAllAccountsActionListener(ActionListener actionListener){
+        btnFindAllAccounts.addActionListener(actionListener);
+    }
+
+    public void setBtnFindAllClientsActionListener(ActionListener actionListener){
+        btnFindAllClients.addActionListener(actionListener);
+    }
+
+    public void setBtnUpdateAccountActionListener(ActionListener actionListener){
+        btnUpdateAccount.addActionListener(actionListener);
+    }
+
+    public void setBtnUpdateClientActionListener(ActionListener actionListener){
         btnInsertAccount.addActionListener(actionListener);
+    }
+
+    public void setBtnInsertAccountActionListener(ActionListener actionListener){
+        btnUpdateClient.addActionListener(actionListener);
     }
 
     public void setBtnInsertClientListener(ActionListener actionListener){
