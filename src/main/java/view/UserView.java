@@ -45,29 +45,30 @@ public class UserView extends JFrame{
         setLocationRelativeTo(null);
         initializeFields();
         setLayout(new BoxLayout(getContentPane(), Y_AXIS));
+
         add(tfLoggedUsername);
         add(taData);
 
-        add(tfClientId);
-        add(tfClientName);
-        add(tfClienIdentityCardNumber);
-        add(tfClientPersonalNumericalCode);
-        add(tfClientAddress);
+//        add(tfClientId);
+//        add(tfClientName);
+//        add(tfClienIdentityCardNumber);
+//        add(tfClientPersonalNumericalCode);
+//        add(tfClientAddress);
 
         add(btnInsertClient);
         add(btnFindAllClients);
         add(btnUpdateClient);
 
-        add(cbType);
-        add(tfAmount);
-        add(tfOwnerId);
+//        add(cbType);
+//        add(tfAmount);
+//        add(tfOwnerId);
 
         add(btnInsertAccount);
         add(btnFindAllAccounts);
         add(btnUpdateAccount);
 
-        add(tfSourceAccountId);
-        add(tfDestinationAccountId);
+//        add(tfSourceAccountId);
+//        add(tfDestinationAccountId);
 
         add(btnMakeTransfer);
         add(btnPayBill);

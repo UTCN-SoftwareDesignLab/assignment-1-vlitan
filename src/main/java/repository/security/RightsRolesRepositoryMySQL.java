@@ -143,4 +143,27 @@ public class RightsRolesRepositoryMySQL implements RightsRolesRepository {
 
         }
     }
+
+    @Override
+    public List<Right> findRightsByRole(Role role) {
+        List<Right> rights = new ArrayList<>();
+        try{
+            PreparedStatement insertStatement = connection
+                    .prepareStatement("SELECT right.name\n" +
+                            "FROM right\n" +
+                            "INNER JOIN ON role.id = role_righ.role_id\n" +
+                            "INNER JOIN ON role_righ.right_id = right.id\n" +
+                            "WHERE role.id = ?");
+            insertStatement.setLong(1, role.getId());
+            ResultSet rs = insertStatement.executeQuery();
+            while(rs.next()){
+                rights.add(new Right(rs.getLong("id"), rs.getString("right")));
+            }
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rights;
+    }
 }

@@ -34,6 +34,7 @@ public class LoginController extends Observable{
                 JOptionPane.showMessageDialog(loginView.getContentPane(), "Login successful!");
                 setChanged();
                 notifyObservers(loginNotification.getResult());//return the user
+                loginView.setVisible(false);
             }
 
         }

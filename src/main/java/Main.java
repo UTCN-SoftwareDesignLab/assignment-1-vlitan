@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         ComponentFactory componentFactory = ComponentFactory.instance();
         LoginController loginController = new LoginController(new LoginView(), componentFactory.getAuthenticationService());
-        MainController mainController = new MainController();
+        MainController mainController = new MainController(new UserView());
         loginController.addObserver(mainController);
-        new UserView();
+
     }
 }
