@@ -6,7 +6,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-
+    private boolean isAdmin;
     public List<Role> getRoles() {
         return roles;
     }
@@ -38,5 +38,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addRole(Role role){
+        this.roles.add(role);
+    }
+
+    @Override
+    public String toString(){
+        return "User\t" + id + "\t" + username + "\t" + password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

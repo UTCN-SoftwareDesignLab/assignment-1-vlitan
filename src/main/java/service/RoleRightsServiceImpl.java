@@ -25,4 +25,9 @@ public class RoleRightsServiceImpl implements RoleRightsService{
         }
         return allRights.contains(right);
     }
+
+    @Override
+    public Role getRoleByTitle(String role) {
+        return rightsRolesRepository.findRoleByTitle(role);
+    }
 }

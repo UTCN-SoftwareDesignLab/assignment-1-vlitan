@@ -49,4 +49,9 @@ public class Client{
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString(){
+        return "User\t" + id + "\t" + name + "\t" + identityCardNumber + "\t" + address;
+    }
 }

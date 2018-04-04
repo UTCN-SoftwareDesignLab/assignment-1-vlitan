@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class Action {
+public class  Action {
     private int id;
     private Date date;
     private int userId;
@@ -39,4 +39,8 @@ public class Action {
         return this.description;
     }
 
+    @Override
+    public String toString(){
+        return "Action\t" + id + "\t" + getDescription() + "\t" + date.toString() + "\t" + userId;
+    }
 }

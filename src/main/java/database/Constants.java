@@ -28,6 +28,7 @@ public class Constants {
 
         public static final String MAKE_TRANSFER = "make_transfer";
         public static final String PAY_BILL = "pay_bill";
+        public static final String VIEW_ACTIVITY = "view_activity";
 
         public static final String[] RIGHTS = new String[]{UPDATE_USER, CREATE_USER, DELETE_USER, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT, CREATE_ACCOUNT, DELETE_ACCOUNT, UPDATE_ACCOUNT};
     }

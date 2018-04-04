@@ -14,18 +14,21 @@ public class UserView extends JFrame{
     private JTextField tfLoggedUsername;
     private JTextArea   taData;
 
-    private JTextField  tfClientName;
-    private JTextField  tfClienIdentityCardNumber;
-    private JTextField  tfClientPersonalNumericalCode;
-    private JTextField  tfClientAddress;
+
 
     private JTextField  tfSourceAccountId;
     private JTextField  tfDestinationAccountId;
 
     private JTextField tfClientId;
-    private JComboBox<AccountType> cbType;
-    private JTextField tfAmount;
-    private JTextField tfOwnerId;
+
+
+    private JTextField tfStartActivityDate;
+    private JTextField tfEndActivityDate;
+    private JButton    btnUpdateUser;
+    private JButton    btnInsertUser;
+    private JButton    btnDeleteUser;
+    private JButton    btnListUsers;
+    private JButton    btnViewActivity;
 
     private JButton btnFindAllAccounts;
     private JButton btnFindAllClients;
@@ -38,6 +41,7 @@ public class UserView extends JFrame{
 
     private JButton btnMakeTransfer;
     private JButton btnPayBill;
+    private JButton btnDeleteAccount;
 
 
     public UserView() throws HeadlessException {
@@ -50,22 +54,16 @@ public class UserView extends JFrame{
         add(taData);
 
         add(tfClientId);
-        add(tfClientName);
-        add(tfClienIdentityCardNumber);
-        add(tfClientPersonalNumericalCode);
-        add(tfClientAddress);
+
 
         add(btnInsertClient);
         add(btnFindAllClients);
         add(btnUpdateClient);
 
-        add(cbType);
-        add(tfAmount);
-        add(tfOwnerId);
-
         add(btnInsertAccount);
         add(btnFindAllAccounts);
         add(btnUpdateAccount);
+        add(btnDeleteAccount);
 
         add(tfSourceAccountId);
         add(tfDestinationAccountId);
@@ -73,7 +71,16 @@ public class UserView extends JFrame{
         add(btnMakeTransfer);
         add(btnPayBill);
 
-
+        add(tfUserName);
+        add(tfUserId);
+        add(tfStartActivityDate);
+        add(tfEndActivityDate);
+        add(btnUpdateUser);
+        add(btnInsertUser);
+        add(btnDeleteUser);
+        add(btnListUsers);
+        add(btnViewActivity);
+        add(cbIsAdmin);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -86,14 +93,7 @@ public class UserView extends JFrame{
         tfSourceAccountId  = new JTextField("source account id");
         tfDestinationAccountId = new JTextField("destination account id");
 
-        tfClientName = new JTextField("client name");
-        tfClienIdentityCardNumber = new JTextField("client identity");
-        tfClientPersonalNumericalCode = new JTextField("client personal code");
-        tfClientAddress = new JTextField("client address");
-
-        cbType = new JComboBox<>();
-        tfAmount = new JTextField("account amount");
-        tfOwnerId = new JTextField("owner id");
+        btnDeleteAccount = new JButton("delete account");
 
         btnFindAllAccounts = new JButton("find all accounts");
         btnFindAllClients = new JButton("find all clients");
@@ -105,6 +105,38 @@ public class UserView extends JFrame{
         btnInsertClient = new JButton("insert client");
         btnMakeTransfer = new JButton("make transfer");
         btnPayBill = new JButton("pay bill");
+
+        tfUserName = new JTextField("username");
+        tfUserId = new JTextField("user id");
+        tfStartActivityDate = new JTextField("start activity date");
+        tfEndActivityDate = new JTextField("end activity date");
+        btnUpdateUser = new JButton("update user");
+        btnInsertUser = new JButton("insert user");
+        btnDeleteUser = new JButton("delete user");
+        btnListUsers = new JButton("list users");
+        btnViewActivity = new JButton("list activity");
+        cbIsAdmin = new JCheckBox();
+
+    }
+
+    public void setBtnUpdateUserActionListener(ActionListener actionListener){
+        btnUpdateUser.addActionListener(actionListener);
+    }
+    public void setBtnInsertUserActionListener(ActionListener actionListener){
+        btnInsertUser.addActionListener(actionListener);
+    }
+    public void setBtnDeleteUserActionListener(ActionListener actionListener){
+        btnDeleteUser.addActionListener(actionListener);
+    }
+    public void setBtnListUsersActionListener(ActionListener actionListener){
+        btnListUsers.addActionListener(actionListener);
+    }
+    public void setBtnViewActivityActionListener(ActionListener actionListener){
+        btnViewActivity.addActionListener(actionListener);
+    }
+
+    public void setBtnDeleteAccountActionListener(ActionListener actionListener){
+        btnDeleteAccount.addActionListener(actionListener);
     }
 
     public void setBtnFindAllAccountsActionListener(ActionListener actionListener){
@@ -139,6 +171,26 @@ public class UserView extends JFrame{
         btnPayBill.addActionListener(actionListener);
     }
 
+    public String getUserId(){
+        return tfUserId.getText();
+    }
+
+    public String getStartActivityDate(){
+        return tfStartActivityDate.getText();
+    }
+
+    public String getEndActivityDate(){
+        return tfEndActivityDate.getText();
+    }
+
+    public boolean getIsAdmin(){
+        return cbIsAdmin.isSelected();
+    }
+
+    public String getUsername(){
+        return tfUserName.getText();
+    }
+
     public void setLoggedUsername(String username){
         tfLoggedUsername.setText(username);
     }
@@ -157,18 +209,6 @@ public class UserView extends JFrame{
 
     public String getClientId(){
         return tfClientId.getText();
-    }
-
-    public String getClientName(){
-        return tfClientName.getText();
-    }
-
-    public String getClientIdentityCardNumber(){
-        return tfClienIdentityCardNumber.getText();
-    }
-
-    public String getClientAddress(){
-        return tfClientAddress.getText();
     }
 
     public AccountType getAccountType(){
