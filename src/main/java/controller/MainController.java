@@ -13,7 +13,6 @@ import view.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -125,7 +124,19 @@ public class MainController implements Observer{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (roleRightsService.hasRight(currentUser, MAKE_TRANSFER)){
-
+                Notification<Transfer> transferNotification = new TransferInputDialog(new JPanel()).getTransfer();
+                if (!transferNotification.hasErrors()){
+                    Transfer transfer = transferNotification.getResult();
+                    //ToDO transfer.setSourceAccount;
+                    //set (currentUser.getId())
+                   // System.out.println("transfer" + );
+                }
+                else {
+                    JOptionPane.showMessageDialog(userView, transferNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(userView, "you dont have the right to " + CREATE_ACCOUNT, "Security error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

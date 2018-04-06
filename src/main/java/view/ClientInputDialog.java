@@ -3,6 +3,7 @@ package view;
 import model.Account;
 import model.AccountType;
 import model.Client;
+import model.builder.ClientBuilder;
 import model.validator.Notification;
 
 import javax.swing.*;
@@ -43,11 +44,11 @@ public class ClientInputDialog {
 
     private void initialiseComponents() {
         panel = new JPanel();
-        tfId = new JTextField("0");
-        tfClientName = new JTextField();
-        tfClientIdentityCardNumber = new JTextField();
-        tfClientPersonalNumericalCode = new JTextField();
-        tfClientAddress = new JTextField();
+        tfId = new JTextField("   0");
+        tfClientName = new JTextField(20);
+        tfClientIdentityCardNumber = new JTextField(12);
+        tfClientPersonalNumericalCode = new JTextField(12);
+        tfClientAddress = new JTextField(20);
     }
 
     public Notification<Client> getClient(){
@@ -58,11 +59,13 @@ public class ClientInputDialog {
             result = JOptionPane.showConfirmDialog(null, panel, "please enter client data", JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
                 try {
-                    Client client = new Client();
-                    client.setId(Integer.parseInt(tfId.getText()));
-                    client.setAddress(tfClientAddress.getText());
-                    client.setPersonalNumericalCode(tfClientPersonalNumericalCode.getText());
-                    client.setIdentityCardNumber(tfClientIdentityCardNumber.getText());
+                    Client client = new ClientBuilder()
+                        .setId(Integer.parseInt(tfId.getText()))
+                        .setAddress(tfClientAddress.getText())
+                        .setPersonalNumericalCode(tfClientPersonalNumericalCode.getText())
+                        .setIdentityCardNumber(tfClientIdentityCardNumber.getText())
+                        .build();
+
                     clientNotification.setResult(client);
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(panel, e.getMessage(), "Parse error", JOptionPane.ERROR_MESSAGE);

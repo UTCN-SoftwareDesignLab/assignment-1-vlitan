@@ -3,6 +3,7 @@ package view;
 import model.Account;
 import model.AccountType;
 import model.Right;
+import model.builder.AccountBuilder;
 import model.validator.Notification;
 
 import javax.swing.*;
@@ -22,6 +23,8 @@ public class AccountInputDialog{
 
     public AccountInputDialog(JPanel panel){
         this.panel = panel;
+        this.panel.setSize(300, 300);
+        this.panel.setLayout(new BoxLayout(this.panel, Y_AXIS));
         initialiseComponents();
         addComponents();
     }
@@ -39,10 +42,10 @@ public class AccountInputDialog{
 
     private void initialiseComponents() {
         panel = new JPanel();
-        tfId = new JTextField("0");
+        tfId = new JTextField("     0");
         cbType = new JComboBox<>(AccountType.values());
-        tfAmount = new JTextField("0");
-        tfOwnerId = new JTextField("0");
+        tfAmount = new JTextField("     0");
+        tfOwnerId = new JTextField("     0");
     }
 
     public Notification<Account> getAccount(){
@@ -53,11 +56,12 @@ public class AccountInputDialog{
             result = JOptionPane.showConfirmDialog(null, panel, "please enter account data", JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
                 try {
-                    Account account = new Account();
-                    account.setId(Integer.parseInt(tfId.getText()));
-                    account.setAmount(Integer.parseInt(tfAmount.getText()));
-                    account.setOwnerId(Integer.parseInt(tfOwnerId.getText()));
-                    account.setType(AccountType.valueOf(cbType.getSelectedItem().toString()));
+                    Account account = (new AccountBuilder())
+                        .setId(Integer.parseInt(tfId.getText()))
+                        .setAmount(Integer.parseInt(tfAmount.getText()))
+                        .setOwnerId(Integer.parseInt(tfOwnerId.getText()))
+                        .setType(AccountType.valueOf(cbType.getSelectedItem().toString()))
+                        .build();
                     accountNotification.setResult(account);
                     parsed = true;
                     return accountNotification;

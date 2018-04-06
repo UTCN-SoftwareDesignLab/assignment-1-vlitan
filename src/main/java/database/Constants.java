@@ -30,7 +30,7 @@ public class Constants {
         public static final String PAY_BILL = "pay_bill";
         public static final String VIEW_ACTIVITY = "view_activity";
 
-        public static final String[] RIGHTS = new String[]{UPDATE_USER, CREATE_USER, DELETE_USER, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT, CREATE_ACCOUNT, DELETE_ACCOUNT, UPDATE_ACCOUNT};
+        public static final String[] RIGHTS = new String[]{MAKE_TRANSFER, PAY_BILL, VIEW_ACTIVITY, UPDATE_USER, CREATE_USER, DELETE_USER, CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT, CREATE_ACCOUNT, DELETE_ACCOUNT, UPDATE_ACCOUNT};
     }
 
     public static Map<String, List<String>> getRolesRights() {
@@ -40,7 +40,7 @@ public class Constants {
         }
         ROLES_RIGHTS.get(ADMINISTRATOR).addAll(Arrays.asList(RIGHTS));
 
-        ROLES_RIGHTS.get(USER).addAll(Arrays.asList(CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT, CREATE_ACCOUNT, DELETE_ACCOUNT, UPDATE_ACCOUNT));
+        ROLES_RIGHTS.get(USER).addAll(Arrays.asList(CREATE_CLIENT, DELETE_CLIENT, UPDATE_CLIENT, CREATE_ACCOUNT, DELETE_ACCOUNT, UPDATE_ACCOUNT, MAKE_TRANSFER, PAY_BILL, VIEW_ACTIVITY));
 
 
         return ROLES_RIGHTS;

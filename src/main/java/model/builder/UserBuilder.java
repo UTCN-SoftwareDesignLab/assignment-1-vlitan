@@ -32,6 +32,11 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder setAdmin(boolean isAdmin) {
+        user.setAdmin(isAdmin);
+        return this;
+    }
+
     public User build(){
         return user;
     }

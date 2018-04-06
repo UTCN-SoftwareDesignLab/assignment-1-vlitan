@@ -4,6 +4,7 @@ import database.Constants;
 import model.Account;
 import model.AccountType;
 import model.User;
+import model.builder.UserBuilder;
 import model.validator.Notification;
 
 import javax.swing.*;
@@ -33,16 +34,17 @@ public class UserInputDialog {
         panel.add(Box.createHorizontalStrut(15));
         panel.add(new Label("is admin?"));
         panel.add(cbIsAdmin);
+        panel.add(Box.createHorizontalStrut(15));
         panel.add(new Label("password"));
         panel.add(tfPassword);
     }
 
     private void initialiseComponents() {
         panel = new JPanel();
-        tfId = new JTextField("0");
-        tfUserName = new JTextField();
+        tfId = new JTextField("   0");
+        tfUserName = new JTextField(10);
         cbIsAdmin = new JCheckBox();
-        tfPassword = new JTextField();
+        tfPassword = new JTextField(10);
     }
 
     public Notification<User> getUser(){
@@ -53,10 +55,11 @@ public class UserInputDialog {
             result = JOptionPane.showConfirmDialog(null, panel, "please enter account data", JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
                 try {
-                    User user = new User();
-                    user.setId(Integer.parseInt(tfId.getText()));
-                    user.setUsername(tfUserName.getText());
-                    user.setAdmin(cbIsAdmin.isSelected());
+                    User user = new UserBuilder()
+                    .setId(Integer.parseInt(tfId.getText()))
+                    .setUsername(tfUserName.getText())
+                    .setAdmin(cbIsAdmin.isSelected())
+                    .build();
                     userNotification.setResult(user);
                     parsed = true;
                     return userNotification;
