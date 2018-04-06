@@ -4,10 +4,12 @@ import database.JDBConnectionWrapper;
 import database.JDBSchemaStringFactory;
 import database.Schema;
 import model.*;
-import model.validator.Notification;
+import model.Action;
+import model.validator.*;
+import repository.bank.UserRepository;
+import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
-import service.RoleRightsService;
-import service.RoleRightsServiceImpl;
+import service.*;
 import view.*;
 
 import javax.swing.*;
@@ -23,10 +25,30 @@ public class MainController implements Observer{
     private User currentUser;
     private UserView userView;
     private RoleRightsService roleRightsService;
+    private AccountService accountService;
+    private ActionService actionService;
+    private TransferService transferService;
+    private BillService billService;
+    private ClientService clientService;
+    private UserRepository userRepository;
 
-    public MainController(UserView userView){
+    //Hate to do this, but now its too late
+    public MainController(UserView userView,
+                             AccountService accountService,
+                             RoleRightsService roleRightsService,
+                             ActionService actionService,
+                             TransferService transferService,
+                             BillService billService,
+                             ClientService clientService,
+                             UserRepository userRepository){
         this.userView = userView;
-        userView.setVisible(false);
+        this.accountService = accountService;
+        this.roleRightsService = roleRightsService;
+        this.actionService = actionService;
+        this.transferService = transferService;
+        this.billService = billService;
+        this.clientService = clientService;
+        this.userRepository = userRepository;
 
         userView.setBtnInsertAccountActionListener(new InsertAccountActionListener());
         userView.setBtnInsertClientListener(new InsertClientListener());
@@ -42,8 +64,6 @@ public class MainController implements Observer{
         userView.setBtnListUsersActionListener(new ListUserActionListener());
         userView.setBtnDeleteAccountActionListener(new DeleteAccountActionListener());
         userView.setBtnViewActivityActionListener(new ViewActivityActionListener());
-        roleRightsService = new RoleRightsServiceImpl(new RightsRolesRepositoryMySQL
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)).getConnection()));
     }
 
     @Override
@@ -73,6 +93,14 @@ public class MainController implements Observer{
                 Notification<Account> accountNotification = (new AccountInputDialog(new JPanel())).getAccount();
                 if (!accountNotification.hasErrors()){
                     System.out.println("update account: " + accountNotification.getResult().getId());
+                    AccountValidator accountValidator = new AccountValidator();
+                    boolean isValid = accountValidator.validate(accountNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, accountValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, accountNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -91,6 +119,14 @@ public class MainController implements Observer{
                 Notification<Account> accountNotification = (new AccountInputDialog(new JPanel())).getAccount();
                 if (!accountNotification.hasErrors()){
                     System.out.println("delete account: " + accountNotification.getResult().getId());
+                    AccountValidator accountValidator = new AccountValidator();
+                    boolean isValid = accountValidator.validate(accountNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, accountValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, accountNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -109,6 +145,14 @@ public class MainController implements Observer{
                 Notification<Account> accountNotification = (new AccountInputDialog(new JPanel())).getAccount();
                 if (!accountNotification.hasErrors()){
                     System.out.println("insert account " + accountNotification.getResult().getId());
+                    AccountValidator accountValidator = new AccountValidator();
+                    boolean isValid = accountValidator.validate(accountNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, accountValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, accountNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -130,6 +174,14 @@ public class MainController implements Observer{
                     //ToDO transfer.setSourceAccount;
                     //set (currentUser.getId())
                    // System.out.println("transfer" + );
+                    TransferValidator transferValidator = new TransferValidator();
+                    boolean isValid = transferValidator.validate(transferNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, transferValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else {
                     JOptionPane.showMessageDialog(userView, transferNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -157,6 +209,14 @@ public class MainController implements Observer{
                 Notification<Client> clientNotification = (new ClientInputDialog(new JPanel())).getClient();
                 if (!clientNotification.hasErrors()){
                     System.out.println("insert client: " + clientNotification.getResult().getId());
+                    ClientValidator clientValidator = new ClientValidator();
+                    boolean isValid = clientValidator.validate(clientNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, clientValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, clientNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -175,6 +235,14 @@ public class MainController implements Observer{
                 Notification<Client> clientNotification = (new ClientInputDialog(new JPanel())).getClient();
                 if (!clientNotification.hasErrors()){
                     System.out.println("update client: " + clientNotification.getResult().getId());
+                    ClientValidator clientValidator = new ClientValidator();
+                    boolean isValid = clientValidator.validate(clientNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, clientValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, clientNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -204,6 +272,14 @@ public class MainController implements Observer{
                         user.addRole(roleRightsService.getRoleByTitle(ADMINISTRATOR));
                     }
                     System.out.println("update client: " + userNotification.getResult().getId());
+                    UserValidator userValidator = new UserValidator();
+                    boolean isValid = userValidator.validate(userNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, userValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, userNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -226,6 +302,15 @@ public class MainController implements Observer{
                         user.addRole(roleRightsService.getRoleByTitle(ADMINISTRATOR));
                     }
                     System.out.println("insert user: " + userNotification.getResult().getId());
+                    UserValidator userValidator = new UserValidator();
+                    boolean isValid = userValidator.validate(userNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, userValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
+
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, userNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -244,6 +329,14 @@ public class MainController implements Observer{
                 Notification<User> userNotification = (new UserInputDialog(new JPanel())).getUser();
                 if (!userNotification.hasErrors()){
                     System.out.println("delete user: " + userNotification.getResult().getId());
+                    UserValidator userValidator = new UserValidator();
+                    boolean isValid = userValidator.validate(userNotification.getResult());
+                    if (isValid){
+
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(userView, userValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, userNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);

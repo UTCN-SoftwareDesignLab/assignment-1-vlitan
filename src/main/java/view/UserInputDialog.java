@@ -74,4 +74,6 @@ public class UserInputDialog {
         } while (result != JOptionPane.CANCEL_OPTION && (parsed == false));
         return userNotification;
     }
+
+
 }
