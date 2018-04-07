@@ -5,6 +5,7 @@ import database.JDBSchemaStringFactory;
 import database.Schema;
 import model.*;
 import model.Action;
+import model.builder.ActionBuilder;
 import model.validator.*;
 import repository.bank.UserRepository;
 import repository.security.RightsRolesRepository;
@@ -100,6 +101,13 @@ public class MainController implements Observer{
                     if (result.hasErrors()){
                         JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
+                    else{
+                        actionService.addAction(new ActionBuilder()
+                                .setUserId(currentUser.getId())
+                                .setDate(new Date(Calendar.getInstance().getTime().getTime()))
+                                .setDescription("updated account")
+                                .build());
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, accountNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -121,6 +129,13 @@ public class MainController implements Observer{
                     Notification<Boolean> result = accountService.delete(accountNotification.getResult());
                     if (result.hasErrors()){
                         JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        actionService.addAction(new ActionBuilder()
+                                .setUserId(currentUser.getId())
+                                .setDate(new Date(Calendar.getInstance().getTime().getTime()))
+                                .setDescription("deleted account")
+                                .build());
                     }
                 }
                 else{
@@ -145,6 +160,13 @@ public class MainController implements Observer{
                     Notification<Boolean> result = accountService.add(accountNotification.getResult());
                     if (result.hasErrors()){
                         JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        actionService.addAction(new ActionBuilder()
+                                .setUserId(currentUser.getId())
+                                .setDate(new Date(Calendar.getInstance().getTime().getTime()))
+                                .setDescription("inserted account")
+                                .build());
                     }
                 }
                 else{
@@ -171,7 +193,10 @@ public class MainController implements Observer{
                         transfer.setDestinationAccount(findDestinationNotification.getResult());
                         transfer.setUserId(currentUser.getId());
                         transfer.setDate(new Date(Calendar.getInstance().getTime().getTime()));
-                        transferService.makeTransfer(transfer);
+                        Notification<Boolean> notification = transferService.makeTransfer(transfer);
+                        if (notification.hasErrors()){
+                            JOptionPane.showMessageDialog(userView, notification.getFormattedErrors(), "invalid transfer", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                     else{
                         JOptionPane.showMessageDialog(userView, findDestinationNotification.getFormattedErrors() + findSourceNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -192,6 +217,7 @@ public class MainController implements Observer{
         public void actionPerformed(ActionEvent e) {
             if (roleRightsService.hasRight(currentUser, PAY_BILL)){
                 JOptionPane.showMessageDialog(userView, "Not yet implemented :( ", "Developer error", JOptionPane.ERROR_MESSAGE);
+
             }
         }
     }
@@ -206,6 +232,13 @@ public class MainController implements Observer{
                     Notification<Boolean> result = clientService.add(clientNotification.getResult());
                     if (result.hasErrors()){
                         JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        actionService.addAction(new ActionBuilder()
+                                .setUserId(currentUser.getId())
+                                .setDate(new Date(Calendar.getInstance().getTime().getTime()))
+                                .setDescription("inserted client")
+                                .build());
                     }
                 }
                 else{
@@ -228,6 +261,13 @@ public class MainController implements Observer{
                     Notification<Boolean> result = clientService.update(clientNotification.getResult());
                     if (result.hasErrors()){
                         JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        actionService.addAction(new ActionBuilder()
+                                .setUserId(currentUser.getId())
+                                .setDate(new Date(Calendar.getInstance().getTime().getTime()))
+                                .setDescription("updated client")
+                                .build());
                     }
                 }
                 else{

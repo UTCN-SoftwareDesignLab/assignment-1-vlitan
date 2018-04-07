@@ -41,7 +41,7 @@ public class AuthenticationServiceMySql implements AuthenticationService {
             userRegisterNotification.setResult(Boolean.FALSE);
             return userRegisterNotification;
         } else {
-            user.setPassword(encodePassword(password));
+           // user.setPassword(encodePassword(password));
             userRegisterNotification.setResult(userRepository.add(user));
             return  userRegisterNotification;
         }
@@ -57,7 +57,7 @@ public class AuthenticationServiceMySql implements AuthenticationService {
         return false;
     }
 
-    private String encodePassword(String password) {
+    public static String encodePassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes("UTF-8"));

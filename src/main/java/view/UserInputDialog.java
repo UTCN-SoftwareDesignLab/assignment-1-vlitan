@@ -6,6 +6,8 @@ import model.AccountType;
 import model.User;
 import model.builder.UserBuilder;
 import model.validator.Notification;
+import service.AuthenticationService;
+import service.AuthenticationServiceMySql;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,6 +61,7 @@ public class UserInputDialog {
                     .setId(Integer.parseInt(tfId.getText()))
                     .setUsername(tfUserName.getText())
                     .setAdmin(cbIsAdmin.isSelected())
+                    .setPassword(tfPassword.getText())
                     .build();
                     userNotification.setResult(user);
                     parsed = true;

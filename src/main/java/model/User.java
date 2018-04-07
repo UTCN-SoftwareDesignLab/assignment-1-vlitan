@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class User {
     private int id;
@@ -48,7 +49,7 @@ public class User {
 
     @Override
     public String toString(){
-        return "User\t" + id + "\t" + username + "\t" + password;
+        return "User\t" + id + "\t" + username + "\troles: " + roles.stream().map(Role::toString).collect(Collectors.joining(", "));
     }
 
     public boolean isAdmin() {

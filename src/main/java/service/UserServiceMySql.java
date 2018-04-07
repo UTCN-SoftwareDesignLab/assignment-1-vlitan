@@ -28,6 +28,7 @@ public class UserServiceMySql implements UserService{
 
         if (isValid) {
             userRepository.add(user);
+
             addNotification.setResult(Boolean.TRUE);
         } else {
             validator.getErrors().forEach(addNotification::addError);
@@ -44,6 +45,7 @@ public class UserServiceMySql implements UserService{
 
         if (isValid) {
             userRepository.update(user);
+
             updateNotification.setResult(Boolean.TRUE);
         } else {
             validator.getErrors().forEach(updateNotification::addError);

@@ -5,6 +5,8 @@ import model.User;
 import model.builder.UserBuilder;
 import model.validator.Notification;
 import repository.security.RightsRolesRepository;
+import service.AuthenticationService;
+import service.AuthenticationServiceMySql;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class UserRepositoryMySql implements UserRepository {
         Connection connection = connectionWrapper.getConnection();
 
         try {
+            user.setPassword(AuthenticationServiceMySql.encodePassword(user.getPassword()));
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO User (`id`,\n" +
                             "`username`,\n" +
@@ -51,6 +54,7 @@ public class UserRepositoryMySql implements UserRepository {
         Connection connection = connectionWrapper.getConnection();
 
         try {
+            user.setPassword(AuthenticationServiceMySql.encodePassword(user.getPassword()));
             PreparedStatement statement = connection.prepareStatement(
                     "UPDATE `User`\n" +
                             "SET\n" +
@@ -63,6 +67,7 @@ public class UserRepositoryMySql implements UserRepository {
             statement.setInt(3, user.getId());
             statement.execute();
             statement.close();
+            rightsRolesRepository.addRolesToUser(user, user.getRoles());
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -174,6 +179,7 @@ public class UserRepositoryMySql implements UserRepository {
                 .setId(id)
                 .setPassword(password)
                 .setUsername(username)
+                .setRoles(rightsRolesRepository.findRolesForUser(new Long(rs.getInt("id"))))
                 .build();
     }
 
