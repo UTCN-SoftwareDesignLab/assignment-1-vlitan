@@ -66,5 +66,18 @@ public class AccountServiceMySql implements AccountService {
     public List<Account> findAll() {
         return accountRepository.findAll();
     }
+
+    @Override
+    public Notification<Account> findById(int id) {
+        Notification<Account> findNotification = new Notification<>();
+        Account account = accountRepository.findById(id);
+        if (account.getId() == 0){
+            findNotification.addError("invalid id");
+        }
+        else{
+            findNotification.setResult(account);
+        }
+        return findNotification;
+    }
 }
 

@@ -13,8 +13,12 @@ import service.*;
 import view.LoginView;
 import view.UserView;
 
+import java.security.MessageDigest;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,16 +33,18 @@ public class Main {
                 (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))),
                 new ActionRepositoryMySql(
                 (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        BillService billService = new BillServiceImpl();
+        BillService billService = new BillServiceImpl(new ActionRepositoryMySql(
+                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
         ClientService clientService = new ClientServiceImpl(new ClientRepositoryMySql(
                 (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        UserRepository userRepository = new UserRepositoryMySql(
+        UserService userService = new UserServiceMySql(new UserRepositoryMySql(
                 (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST))),
-                new RightsRolesRepositoryMySQL (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)).getConnection()));
+                new RightsRolesRepositoryMySQL (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)).getConnection())));
 
         ComponentFactory componentFactory = ComponentFactory.instance();
         LoginController loginController = new LoginController(new LoginView(), componentFactory.getAuthenticationService());
-        MainController mainController = new MainController(new UserView(), accountService, roleRightsService, actionService, transferService, billService, clientService, userRepository);
+        MainController mainController = new MainController(new UserView(), accountService, roleRightsService, actionService, transferService, billService, clientService, userService);
         loginController.addObserver(mainController);
-    }
+
+     }
 }

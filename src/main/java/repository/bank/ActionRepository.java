@@ -1,6 +1,7 @@
 package repository.bank;
 
 import model.Action;
+import model.ListActivityDTO;
 import model.Transfer;
 import model.User;
 
@@ -13,5 +14,5 @@ public interface ActionRepository {
     List<Action> findAll();
     Action findById(int id);
     List<Action> findByUser(User user);
-    List<Action> findByUserInInterval(User user, Date start, Date end);
+    List<Action> findByUserInInterval(ListActivityDTO listActivityDTO);
 }

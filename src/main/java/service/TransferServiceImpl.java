@@ -25,6 +25,7 @@ public class TransferServiceImpl implements TransferService{
         boolean isValid = transferValidator.validate(transfer);
         if (isValid){
             executeTransfer(transfer);
+            actionRepository.add(transfer);
             madeTransferNotification.setResult(Boolean.TRUE);
         }
         else{

@@ -53,4 +53,9 @@ public class Account {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    @Override
+    public String toString(){
+        return "account\t" + id + "\t" + amount + "\t"+type.toString()+ "\t"+ creationDate.toString()+"\t"+ownerId;
+    }
 }

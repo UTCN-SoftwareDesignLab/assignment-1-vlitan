@@ -1,6 +1,7 @@
 package service;
 
 import model.Action;
+import model.ListActivityDTO;
 import model.User;
 import model.validator.Notification;
 import model.validator.UserValidator;
@@ -33,7 +34,7 @@ public class ActionServiceMySql implements ActionService{
     }
 
     @Override
-    public List<Action> getActionsByUserInInterval(User user, Date start, Date end) {
-        return actionRepository.findByUser(user);
+    public List<Action> getActionsByUserInInterval(ListActivityDTO listActivityDTO) {
+        return actionRepository.findByUserInInterval(listActivityDTO);
     }
 }

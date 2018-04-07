@@ -27,11 +27,14 @@ public class TransferInputDialog {
         panel.add(new Label("account id"));
         panel.add(tfSourceId);
         panel.add(Box.createHorizontalStrut(15));
-        panel.add(new Label("account type"));
+        panel.add(new Label("amount"));
         panel.add(tfAmount);
         panel.add(Box.createHorizontalStrut(15));
-        panel.add(new Label("owner id"));
+        panel.add(new Label("destination id"));
         panel.add(tfDestinationId);
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new Label("source id"));
+        panel.add(tfSourceId);
     }
 
     private void initialiseComponents() {

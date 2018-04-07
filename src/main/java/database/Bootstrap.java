@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.*;
 
 import static database.Constants.Rights.RIGHTS;
+import static database.Constants.Roles.ADMINISTRATOR;
 import static database.Constants.Roles.ROLES;
 import static database.Constants.getRolesRights;
 import static database.Schema.TEST;
@@ -131,6 +132,7 @@ public class Bootstrap {
         for (User user : users){
             rightsRolesRepository.addRolesToUser(user, roles);
         }
+        rightsRolesRepository.addRolesToUser(users.get(0), new ArrayList<>(Arrays.asList(rightsRolesRepository.findRoleByTitle(Constants.Roles.ADMINISTRATOR))));
     }
 
 

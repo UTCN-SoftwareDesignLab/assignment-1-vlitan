@@ -132,10 +132,10 @@ public class SqlQueryFactory {
                     "('client-name3', 'identity3', 'personalnb3', 'address3');\n";
 
             case USER: return
-                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-andrei', 'pass1');\n" +
-                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-mihai', 'pass2');\n" +
-                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-pavel', 'pass3');\n" +
-                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-chinezu', 'pass4');";
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-andrei', 'e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349');\n" +
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-mihai', '1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9');\n" +
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-pavel', '3acb59306ef6e660cf832d1d34c4fba3d88d616f0bb5c2a9e0f82d18ef6fc167');\n" +
+                    "INSERT INTO `User` (`username`, `password`) VALUES ('user-chinezu', 'a417b5dc3d06d15d91c6687e27fc1705ebc56b3b2d813abe03066e5643fe4e74');";
 
             case ACCOUNT: return
                     "INSERT INTO `Account` (`account_type`,`amount`,`creation_date`,`Client_id`)VALUES('CREDIT',2,'1901-03-02',1);\n" +
@@ -146,25 +146,7 @@ public class SqlQueryFactory {
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description2','1931-03-02',2);\n" +
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description2','1999-03-02',2);\n" +
                     "INSERT INTO `Action` (`description`, `date`,`User_id`) VALUES ('mock description3','1981-03-02',1);\n";
-//            case ROLE:return
-//                    "INSERT INTO `role`(`id`,`role`)VALUES(null,'"+ADMINISTRATOR+"';\n"+
-//                    "INSERT INTO `role`(`id`,`role`)VALUES(null,'"+USER+"';\n";
-//            case RIGHT:return
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+CREATE_CLIENT+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+DELETE_CLIENT+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+UPDATE_CLIENT+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+CREATE_USER+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+DELETE_USER+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+UPDATE_USER+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+CREATE_ACCOUNT+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+DELETE_ACCOUNT+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+UPDATE_ACCOUNT+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+MAKE_TRANSFER+"';\n"+
-//                    "INSERT INTO `right`(`id`,`right`)VALUES(null,'"+PAY_BILL+"';\n";
-//            case ROLE_RIGHT:return
-//                    "INSERT INTO `role_right`(`id`,`role`,`right`)VALUES(null,'"+ADMINISTRATOR+"','" +MAKE_TRANSFER+"';\n"+
-//                    "INSERT INTO `role_right`(`id`,`role`,`right`)VALUES(null,'"+PAY_BILL+"';\n";
-//            case USER_ROLE:return  "SELECT 1;";
+
 
             default:
                 return  "SELECT 1;";

@@ -15,8 +15,11 @@ import view.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.stream.Collectors;
 
 import static database.Constants.Rights.*;
 import static database.Constants.Roles.ADMINISTRATOR;
@@ -30,7 +33,7 @@ public class MainController implements Observer{
     private TransferService transferService;
     private BillService billService;
     private ClientService clientService;
-    private UserRepository userRepository;
+    private UserService userService;
 
     //Hate to do this, but now its too late
     public MainController(UserView userView,
@@ -40,7 +43,7 @@ public class MainController implements Observer{
                              TransferService transferService,
                              BillService billService,
                              ClientService clientService,
-                             UserRepository userRepository){
+                             UserService userService){
         this.userView = userView;
         this.accountService = accountService;
         this.roleRightsService = roleRightsService;
@@ -48,7 +51,7 @@ public class MainController implements Observer{
         this.transferService = transferService;
         this.billService = billService;
         this.clientService = clientService;
-        this.userRepository = userRepository;
+        this.userService = userService;
 
         userView.setBtnInsertAccountActionListener(new InsertAccountActionListener());
         userView.setBtnInsertClientListener(new InsertClientListener());
@@ -82,7 +85,7 @@ public class MainController implements Observer{
     private class FindAllAccountsActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            userView.setData("all acounts");
+            userView.setData(accountService.findAll().stream().map(Account::toString).collect(Collectors.joining("\n")));
         }
     }
 
@@ -93,13 +96,9 @@ public class MainController implements Observer{
                 Notification<Account> accountNotification = (new AccountInputDialog(new JPanel())).getAccount();
                 if (!accountNotification.hasErrors()){
                     System.out.println("update account: " + accountNotification.getResult().getId());
-                    AccountValidator accountValidator = new AccountValidator();
-                    boolean isValid = accountValidator.validate(accountNotification.getResult());
-                    if (isValid){
-
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(userView, accountValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    Notification<Boolean> result = accountService.update(accountNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -119,13 +118,9 @@ public class MainController implements Observer{
                 Notification<Account> accountNotification = (new AccountInputDialog(new JPanel())).getAccount();
                 if (!accountNotification.hasErrors()){
                     System.out.println("delete account: " + accountNotification.getResult().getId());
-                    AccountValidator accountValidator = new AccountValidator();
-                    boolean isValid = accountValidator.validate(accountNotification.getResult());
-                    if (isValid){
-
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(userView, accountValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    Notification<Boolean> result = accountService.delete(accountNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -145,13 +140,11 @@ public class MainController implements Observer{
                 Notification<Account> accountNotification = (new AccountInputDialog(new JPanel())).getAccount();
                 if (!accountNotification.hasErrors()){
                     System.out.println("insert account " + accountNotification.getResult().getId());
-                    AccountValidator accountValidator = new AccountValidator();
-                    boolean isValid = accountValidator.validate(accountNotification.getResult());
-                    if (isValid){
-
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(userView, accountValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    Account account = accountNotification.getResult();
+                    account.setCreationDate(new Date(Calendar.getInstance().getTime().getTime()));
+                    Notification<Boolean> result = accountService.add(accountNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -171,16 +164,17 @@ public class MainController implements Observer{
                 Notification<Transfer> transferNotification = new TransferInputDialog(new JPanel()).getTransfer();
                 if (!transferNotification.hasErrors()){
                     Transfer transfer = transferNotification.getResult();
-                    //ToDO transfer.setSourceAccount;
-                    //set (currentUser.getId())
-                   // System.out.println("transfer" + );
-                    TransferValidator transferValidator = new TransferValidator();
-                    boolean isValid = transferValidator.validate(transferNotification.getResult());
-                    if (isValid){
-
+                    Notification<Account> findSourceNotification = accountService.findById(transfer.getSourceAccount().getId());
+                    Notification<Account> findDestinationNotification = accountService.findById(transfer.getDestinationAccount().getId());
+                    if (!findDestinationNotification.hasErrors() && !findSourceNotification.hasErrors()){
+                        transfer.setSourceAccount(findSourceNotification.getResult());
+                        transfer.setDestinationAccount(findDestinationNotification.getResult());
+                        transfer.setUserId(currentUser.getId());
+                        transfer.setDate(new Date(Calendar.getInstance().getTime().getTime()));
+                        transferService.makeTransfer(transfer);
                     }
                     else{
-                        JOptionPane.showMessageDialog(userView, transferValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(userView, findDestinationNotification.getFormattedErrors() + findSourceNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else {
@@ -197,7 +191,7 @@ public class MainController implements Observer{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (roleRightsService.hasRight(currentUser, PAY_BILL)){
-
+                JOptionPane.showMessageDialog(userView, "Not yet implemented :( ", "Developer error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -209,13 +203,9 @@ public class MainController implements Observer{
                 Notification<Client> clientNotification = (new ClientInputDialog(new JPanel())).getClient();
                 if (!clientNotification.hasErrors()){
                     System.out.println("insert client: " + clientNotification.getResult().getId());
-                    ClientValidator clientValidator = new ClientValidator();
-                    boolean isValid = clientValidator.validate(clientNotification.getResult());
-                    if (isValid){
-
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(userView, clientValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    Notification<Boolean> result = clientService.add(clientNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -235,13 +225,9 @@ public class MainController implements Observer{
                 Notification<Client> clientNotification = (new ClientInputDialog(new JPanel())).getClient();
                 if (!clientNotification.hasErrors()){
                     System.out.println("update client: " + clientNotification.getResult().getId());
-                    ClientValidator clientValidator = new ClientValidator();
-                    boolean isValid = clientValidator.validate(clientNotification.getResult());
-                    if (isValid){
-
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(userView, clientValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    Notification<Boolean> result = clientService.update(clientNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -257,7 +243,7 @@ public class MainController implements Observer{
     private class FindAllClientsActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            userView.setData("all clients");
+            userView.setData(clientService.findAll().stream().map(Client::toString).collect(Collectors.joining("\n")));
         }
     }
 
@@ -272,13 +258,9 @@ public class MainController implements Observer{
                         user.addRole(roleRightsService.getRoleByTitle(ADMINISTRATOR));
                     }
                     System.out.println("update client: " + userNotification.getResult().getId());
-                    UserValidator userValidator = new UserValidator();
-                    boolean isValid = userValidator.validate(userNotification.getResult());
-                    if (isValid){
-
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(userView, userValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    Notification<Boolean> result = userService.update(userNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -301,16 +283,11 @@ public class MainController implements Observer{
                     if (user.isAdmin()){
                         user.addRole(roleRightsService.getRoleByTitle(ADMINISTRATOR));
                     }
-                    System.out.println("insert user: " + userNotification.getResult().getId());
-                    UserValidator userValidator = new UserValidator();
-                    boolean isValid = userValidator.validate(userNotification.getResult());
-                    if (isValid){
-
+                    System.out.println("update client: " + userNotification.getResult().getId());
+                    Notification<Boolean> result = userService.add(userNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
-                    else{
-                        JOptionPane.showMessageDialog(userView, userValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
-                    }
-
                 }
                 else{
                     JOptionPane.showMessageDialog(userView, userNotification.getFormattedErrors(), "Data retrieval error", JOptionPane.ERROR_MESSAGE);
@@ -328,14 +305,14 @@ public class MainController implements Observer{
             if (roleRightsService.hasRight(currentUser, DELETE_USER)){
                 Notification<User> userNotification = (new UserInputDialog(new JPanel())).getUser();
                 if (!userNotification.hasErrors()){
-                    System.out.println("delete user: " + userNotification.getResult().getId());
-                    UserValidator userValidator = new UserValidator();
-                    boolean isValid = userValidator.validate(userNotification.getResult());
-                    if (isValid){
-
+                    User user = userNotification.getResult();
+                    if (user.isAdmin()){
+                        user.addRole(roleRightsService.getRoleByTitle(ADMINISTRATOR));
                     }
-                    else{
-                        JOptionPane.showMessageDialog(userView, userValidator.getErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
+                    System.out.println("update client: " + userNotification.getResult().getId());
+                    Notification<Boolean> result = userService.deleteById(userNotification.getResult());
+                    if (result.hasErrors()){
+                        JOptionPane.showMessageDialog(userView, result.getFormattedErrors(), "invalid data", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else{
@@ -351,7 +328,7 @@ public class MainController implements Observer{
     private class ListUserActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            userView.setData("all users");
+            userView.setData(userService.findAll().stream().map(User::toString).collect(Collectors.joining("\n")));
         }
     }
 
@@ -359,7 +336,10 @@ public class MainController implements Observer{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             if (roleRightsService.hasRight(currentUser, VIEW_ACTIVITY)){
-
+                Notification<ListActivityDTO> activityDTONotification = (new ListActivityInputDialog(new JPanel())).getActivityDTO();
+                if (!activityDTONotification.hasErrors()){
+                    userView.setData(actionService.getActionsByUserInInterval(activityDTONotification.getResult()).stream().map(Action::toString).collect(Collectors.joining("\n")));
+                }
             }
             else{
                 JOptionPane.showMessageDialog(userView, "you dont have the right to " + VIEW_ACTIVITY, "Security error", JOptionPane.ERROR_MESSAGE);

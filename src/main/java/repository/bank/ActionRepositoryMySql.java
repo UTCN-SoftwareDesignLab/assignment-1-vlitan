@@ -2,6 +2,7 @@ package repository.bank;
 
 import database.JDBConnectionWrapper;
 import model.Action;
+import model.ListActivityDTO;
 import model.Transfer;
 import model.User;
 import model.builder.ActionBuilder;
@@ -130,7 +131,7 @@ public class ActionRepositoryMySql implements ActionRepository {
     }
 
     @Override
-    public List<Action> findByUserInInterval(User user, Date start, Date end) {
+    public List<Action> findByUserInInterval(ListActivityDTO listActivityDTO) {
         Connection connection = connectionWrapper.getConnection();
         List<Action> actions = new ArrayList<>();
 
@@ -140,9 +141,9 @@ public class ActionRepositoryMySql implements ActionRepository {
                             "`User_id` = ? AND \n" +
                             "(DATEDIFF(?, `date`) <= 0) AND \n" +
                             "(DATEDIFF(`date`, ?) <= 0);");
-            statement.setInt(1, user.getId());
-            statement.setDate(2, start);
-            statement.setDate(3, end);
+            statement.setInt(1, listActivityDTO.getUserId());
+            statement.setDate(2, listActivityDTO.getStartDate());
+            statement.setDate(3, listActivityDTO.getEndDate());
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 actions.add(getActionFromResultSet(rs));

@@ -1,5 +1,6 @@
 import database.JDBConnectionWrapper;
 import database.JDBSchemaStringFactory;
+import database.Schema;
 import model.Action;
 import repository.bank.*;
 import repository.security.RightsRolesRepository;
@@ -49,7 +50,8 @@ public class ComponentFactory {
 
         accountService = new AccountServiceMySql(this.accountRepository);
         actionService = new ActionServiceMySql(this.actionRepository);
-        billService = new BillServiceImpl();
+        billService = new BillServiceImpl(new ActionRepositoryMySql(
+                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
         transferService = new TransferServiceImpl(this.accountRepository, this.actionRepository);
     }
 

@@ -11,4 +11,5 @@ public interface AccountService {
     public Notification<Boolean> delete(Account account);
     public Notification<Boolean> update(Account account);
     public List<Account> findAll();
+    public Notification<Account> findById(int id);
 }

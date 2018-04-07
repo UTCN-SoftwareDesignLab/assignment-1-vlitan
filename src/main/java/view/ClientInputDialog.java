@@ -44,7 +44,7 @@ public class ClientInputDialog {
 
     private void initialiseComponents() {
         panel = new JPanel();
-        tfId = new JTextField("   0");
+        tfId = new JTextField("0");
         tfClientName = new JTextField(20);
         tfClientIdentityCardNumber = new JTextField(12);
         tfClientPersonalNumericalCode = new JTextField(12);
@@ -61,12 +61,14 @@ public class ClientInputDialog {
                 try {
                     Client client = new ClientBuilder()
                         .setId(Integer.parseInt(tfId.getText()))
+                            .setName(tfClientName.getText())
                         .setAddress(tfClientAddress.getText())
                         .setPersonalNumericalCode(tfClientPersonalNumericalCode.getText())
                         .setIdentityCardNumber(tfClientIdentityCardNumber.getText())
                         .build();
 
                     clientNotification.setResult(client);
+                    return clientNotification;
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(panel, e.getMessage(), "Parse error", JOptionPane.ERROR_MESSAGE);
                 }

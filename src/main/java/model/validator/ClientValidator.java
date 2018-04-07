@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class ClientValidator {
-    private static final String CLIENT_NAME_REGEX = "[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+$";
+    private static final String CLIENT_NAME_REGEX = "[a-zA-Z]";
     private static final String PERSONAL_NUMERICAL_CODE_REGEX = "[1-6][0-9]{9}";
     private static final String IDENTITY_CARD_NUMBER_REGEX = "[0-9]{4}";
 
@@ -28,9 +28,9 @@ public class ClientValidator {
     }
 
     private void validateName(String name){
-        if (!Pattern.compile(CLIENT_NAME_REGEX).matcher(name).matches()) {
-            errors.add("Invalid name!");
-        }
+//        if (!Pattern.compile(CLIENT_NAME_REGEX).matcher(name).matches()) {
+//            errors.add("Invalid name!");
+//        }
     }
 
     private void validatePersonalNumericalCode(String personalNumericalCode){

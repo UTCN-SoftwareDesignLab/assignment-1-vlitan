@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -7,6 +8,7 @@ public class User {
     private String username;
     private String password;
     private boolean isAdmin;
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -15,7 +17,7 @@ public class User {
         this.roles = roles;
     }
 
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
     public int getId() {
         return id;
     }

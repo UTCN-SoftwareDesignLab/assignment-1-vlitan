@@ -34,6 +34,9 @@ public class AccountInputDialog{
         panel.add(tfId);
         panel.add(Box.createHorizontalStrut(15));
         panel.add(new Label("account type"));
+        panel.add(cbType);
+        panel.add(Box.createHorizontalStrut(15));
+        panel.add(new Label("amount"));
         panel.add(tfAmount);
         panel.add(Box.createHorizontalStrut(15));
         panel.add(new Label("owner id"));
