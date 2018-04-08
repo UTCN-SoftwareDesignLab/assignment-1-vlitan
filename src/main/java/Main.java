@@ -23,28 +23,16 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         //this code has to be purged after evaluation
-        RoleRightsService roleRightsService =  new RoleRightsServiceImpl(new RightsRolesRepositoryMySQL
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)).getConnection()));
-        AccountService accountService = new AccountServiceMySql(new AccountRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        ActionService actionService = new ActionServiceMySql(new ActionRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        TransferService transferService = new TransferServiceImpl(new AccountRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))),
-                new ActionRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        BillService billService = new BillServiceImpl(new ActionRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        ClientService clientService = new ClientServiceImpl(new ClientRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        UserService userService = new UserServiceMySql(new UserRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST))),
-                new RightsRolesRepositoryMySQL (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)).getConnection())));
-
         ComponentFactory componentFactory = ComponentFactory.instance();
         LoginController loginController = new LoginController(new LoginView(), componentFactory.getAuthenticationService());
-        MainController mainController = new MainController(new UserView(), accountService, roleRightsService, actionService, transferService, billService, clientService, userService);
+        MainController mainController = new MainController(new UserView(),
+                componentFactory.getAccountService(),
+                componentFactory.getRoleRightsService(),
+                componentFactory.getActionService(),
+                componentFactory.getTransferService(),
+                componentFactory.getBillService(),
+                componentFactory.getClientService(),
+                componentFactory.getUserService());
         loginController.addObserver(mainController);
-
      }
 }

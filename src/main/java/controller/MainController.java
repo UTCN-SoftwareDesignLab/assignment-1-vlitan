@@ -216,8 +216,11 @@ public class MainController implements Observer{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (roleRightsService.hasRight(currentUser, PAY_BILL)){
-                JOptionPane.showMessageDialog(userView, "Not yet implemented :( ", "Developer error", JOptionPane.ERROR_MESSAGE);
-
+                actionService.addAction(new ActionBuilder()
+                        .setUserId(currentUser.getId())
+                        .setDate(new Date(Calendar.getInstance().getTime().getTime()))
+                        .setDescription("payed a bill ;) ")
+                        .build());
             }
         }
     }
