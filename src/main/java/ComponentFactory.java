@@ -81,43 +81,24 @@ public class ComponentFactory {
         }
         return instance;
     }
-/*
-*   RoleRightsService roleRightsService =  new RoleRightsServiceImpl(new RightsRolesRepositoryMySQL
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)).getConnection()));
-        AccountService accountService = new AccountServiceMySql(new AccountRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        ActionService actionService = new ActionServiceMySql(new ActionRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        TransferService transferService = new TransferServiceImpl(new AccountRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))),
-                new ActionRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        BillService billService = new BillServiceImpl(new ActionRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        ClientService clientService = new ClientServiceImpl(new ClientRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
-        UserService userService = new UserServiceMySql(new UserRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST))),
-                new RightsRolesRepositoryMySQL (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)).getConnection())));
-* */
+
     private ComponentFactory() {
         JDBConnectionWrapper connectionWrapper = new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(TEST));
+        ///create repos
         this.rightsRolesRepository = new RightsRolesRepositoryMySQL(connectionWrapper.getConnection());
         this.userRepository = new UserRepositoryMySql(connectionWrapper, this.rightsRolesRepository);
         this.accountRepository = new AccountRepositoryMySql(connectionWrapper);
         this.actionRepository = new ActionRepositoryMySql(connectionWrapper);
         this.clientRepository = new ClientRepositoryMySql(connectionWrapper);
-
+        //create services
         this.authenticationService = new AuthenticationServiceMySql(this.userRepository, this.rightsRolesRepository);
-
         this.accountService = new AccountServiceMySql(this.accountRepository);
         this.actionService = new ActionServiceMySql(this.actionRepository);
-        this.billService = new BillServiceImpl(new ActionRepositoryMySql(
-                (new JDBConnectionWrapper(JDBSchemaStringFactory.getSchemaString(Schema.TEST)))));
+        this.billService = new BillServiceImpl(this.actionRepository);
         this.transferService = new TransferServiceImpl(this.accountRepository, this.actionRepository);
-        this.roleRightsService =  new RoleRightsServiceImpl(new RightsRolesRepositoryMySQL(connectionWrapper.getConnection()));
+        this.roleRightsService =  new RoleRightsServiceImpl(this.rightsRolesRepository);
         this.clientService = new ClientServiceImpl(this.clientRepository);
-        this.userService = new UserServiceMySql(new UserRepositoryMySql(connectionWrapper, new RightsRolesRepositoryMySQL (connectionWrapper.getConnection())));
+        this.userService = new UserServiceMySql(this.userRepository);
     }
 
 

@@ -3,10 +3,7 @@ package repository;
 import database.Bootstrap;
 import database.JDBConnectionWrapper;
 import database.JDBSchemaStringFactory;
-import model.Account;
-import model.Action;
-import model.Transfer;
-import model.User;
+import model.*;
 import model.builder.AccountBuilder;
 import model.builder.ActionBuilder;
 import model.builder.UserBuilder;
@@ -75,7 +72,7 @@ public class ActionRepositoryMySqlTester {
         Date start = new Date(15, 1, 1);
         Date end = new Date(45, 1, 2);
         User user = (new UserBuilder()).setId(2).build();
-        List<Action> actions = repository.findByUserInInterval(user, start, end);
+        List<Action> actions = repository.findByUserInInterval(new ListActivityDTO(user.getId(), start, end));
         assertEquals(1, actions.size());
         assertEquals(actions.get(0).getDescription(), "mock description2");
     }
