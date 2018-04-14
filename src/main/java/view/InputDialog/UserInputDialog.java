@@ -1,13 +1,8 @@
-package view;
+package view.InputDialog;
 
-import database.Constants;
-import model.Account;
-import model.AccountType;
 import model.User;
 import model.builder.UserBuilder;
 import model.validator.Notification;
-import service.AuthenticationService;
-import service.AuthenticationServiceMySql;
 
 import javax.swing.*;
 import java.awt.*;

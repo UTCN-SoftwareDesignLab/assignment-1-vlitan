@@ -1,8 +1,6 @@
-package view;
+package view.InputDialog;
 
-import model.Client;
 import model.ListActivityDTO;
-import model.builder.ClientBuilder;
 import model.validator.Notification;
 
 import javax.swing.*;

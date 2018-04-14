@@ -1,8 +1,7 @@
-package view;
+package view.InputDialog;
 
 import model.Account;
 import model.AccountType;
-import model.Right;
 import model.builder.AccountBuilder;
 import model.validator.Notification;
 

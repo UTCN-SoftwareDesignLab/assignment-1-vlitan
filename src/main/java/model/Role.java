@@ -46,4 +46,17 @@ public class Role {
     public String toString(){
         return role;
     }
+
+    @Override
+    public boolean equals(Object object)
+    {
+        boolean same = false;
+
+        if (object != null && object instanceof Role)
+        {
+            same = this.id == ((Role) object).getId();
+        }
+
+        return same;
+    }
 }

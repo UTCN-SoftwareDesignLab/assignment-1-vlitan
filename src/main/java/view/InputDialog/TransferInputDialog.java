@@ -1,7 +1,6 @@
-package view;
+package view.InputDialog;
 
 import model.Account;
-import model.AccountType;
 import model.Transfer;
 import model.builder.AccountBuilder;
 import model.builder.TransferBuilder;

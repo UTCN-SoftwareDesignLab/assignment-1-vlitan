@@ -1,5 +1,9 @@
 import controller.LoginController;
 import controller.MainController;
+import controller.OperationsController.AccountOperationsController;
+import controller.OperationsController.ClientOperationsController;
+import controller.OperationsController.MiscOperationsController;
+import controller.OperationsController.UserOperationsController;
 import database.JDBConnectionWrapper;
 import database.JDBSchemaStringFactory;
 import database.Schema;
@@ -10,7 +14,9 @@ import repository.bank.*;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
 import service.*;
+import view.AdminView;
 import view.LoginView;
+import view.OperationViewFactory;
 import view.UserView;
 
 import java.security.MessageDigest;
@@ -21,18 +27,29 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        //this code has to be purged after evaluation
         ComponentFactory componentFactory = ComponentFactory.instance();
+        OperationViewFactory operationViewFactory = OperationViewFactory.instance();
         LoginController loginController = new LoginController(new LoginView(), componentFactory.getAuthenticationService());
-        MainController mainController = new MainController(new UserView(),
-                componentFactory.getAccountService(),
+        AccountOperationsController accountOperationsController = new AccountOperationsController(operationViewFactory.getAccountOperationsView(),
                 componentFactory.getRoleRightsService(),
-                componentFactory.getActionService(),
-                componentFactory.getTransferService(),
-                componentFactory.getBillService(),
+                componentFactory.getAccountService(),
+                componentFactory.getActionService());
+        ClientOperationsController clientOperationsController = new ClientOperationsController(operationViewFactory.getClientOperationsView(),
+                componentFactory.getRoleRightsService(),
                 componentFactory.getClientService(),
-                componentFactory.getUserService());
+                componentFactory.getActionService());
+        MiscOperationsController miscOperationsController = new MiscOperationsController(operationViewFactory.getMiscOperationsView(),
+                componentFactory.getRoleRightsService(),
+                componentFactory.getAccountService(),
+                componentFactory.getTransferService(),
+                componentFactory.getActionService());
+        UserOperationsController userOperationsController = new UserOperationsController(operationViewFactory.getUserOperationsView(),
+                componentFactory.getRoleRightsService(),
+                componentFactory.getUserService(),
+                componentFactory.getActionService());
+        MainController mainController = new MainController(componentFactory.getRoleRightsService(), new UserView(),  new AdminView(), accountOperationsController, clientOperationsController, miscOperationsController, userOperationsController);
         loginController.addObserver(mainController);
      }
 }

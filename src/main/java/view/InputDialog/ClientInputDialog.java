@@ -1,7 +1,5 @@
-package view;
+package view.InputDialog;
 
-import model.Account;
-import model.AccountType;
 import model.Client;
 import model.builder.ClientBuilder;
 import model.validator.Notification;
