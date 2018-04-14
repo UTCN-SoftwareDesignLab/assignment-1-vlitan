@@ -49,7 +49,10 @@ public class Main {
                 componentFactory.getRoleRightsService(),
                 componentFactory.getUserService(),
                 componentFactory.getActionService());
+
         MainController mainController = new MainController(componentFactory.getRoleRightsService(), new UserView(),  new AdminView(), accountOperationsController, clientOperationsController, miscOperationsController, userOperationsController);
         loginController.addObserver(mainController);
+
+
      }
 }

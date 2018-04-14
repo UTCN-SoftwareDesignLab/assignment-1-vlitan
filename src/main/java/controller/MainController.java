@@ -46,10 +46,12 @@ public class MainController implements Observer{
             if (currentUser.getRoles().contains(roleRightsService.getRoleByTitle(Constants.Roles.ADMINISTRATOR))){
                 adminView.setVisible(true);
                 adminView.setTitle("logged user: " + currentUser.getUsername());
+                adminView.addComponents();
             }
             else{
                 userView.setVisible(true);
                 userView.setTitle("logged user: " + currentUser.getUsername());
+                userView.addComponents();
             }
         }
         else{

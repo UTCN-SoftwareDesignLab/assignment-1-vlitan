@@ -9,19 +9,17 @@ public abstract class BaseView extends JFrame{
     private JTabbedPane tpOperations;
 
     public BaseView(){
-        this.setVisible(true);
+        this.setVisible(false);
         setSize(600, 800);
         setLayout(new BoxLayout(getContentPane(), Y_AXIS));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         tpOperations = new JTabbedPane();
-        addComponents();
         add(tpOperations);
     }
 
     public JTabbedPane getTpOperations(){
         return tpOperations;
     }
-
-    abstract void addComponents();
+    ;
 }
